@@ -24,6 +24,7 @@
 require 'active_record'
 
 module ValidatesCaptcha
+  autoload :TestCase, 'validates_captcha/test_case'
   autoload :VERSION, 'validates_captcha/version'
   
   # Returns ValidatesCaptcha's current version number.

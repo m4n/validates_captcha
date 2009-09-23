@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.email = 'martin@mehringen.de'
   spec.homepage = 'http://github.com/m4n/validates_captcha'
   spec.authors = ['Martin Andert']
-  spec.files = ["CHANGELOG", "MIT-LICENSE", "README.rdoc", "Rakefile", "lib/validates_captcha.rb", "lib/validates_captcha/version.rb", "rails/init.rb", "script/console", "test/cases/validates_captcha_test.rb", "test/test_helper.rb", "validates_captcha.gemspec"]
+  spec.files = ["CHANGELOG", "MIT-LICENSE", "README.rdoc", "Rakefile", "lib/validates_captcha.rb", "lib/validates_captcha/test_case.rb", "lib/validates_captcha/version.rb", "rails/init.rb", "script/console", "test/cases/validates_captcha_test.rb", "test/test_helper.rb", "validates_captcha.gemspec"]
   spec.test_files = spec.files.select { |file| file[0..4] == 'test/' }
   spec.has_rdoc = true
   spec.extra_rdoc_files = ["CHANGELOG", "MIT-LICENSE", "README.rdoc"]

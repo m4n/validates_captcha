@@ -1,9 +1,13 @@
-require 'test/unit'
+$:.unshift File.dirname(__FILE__) + '/../../lib'
+
 require 'rubygems'
+require 'test/unit'
 
-gem 'activerecord'
-require 'active_record'
-
-$:.unshift File.dirname(__FILE__) + '/../lib'
 require 'validates_captcha'
+
+begin
+  require 'ruby-debug'
+  Debugger.start
+rescue LoadError
+end
 

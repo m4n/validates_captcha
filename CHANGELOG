@@ -1,3 +1,5 @@
 *Edge*
 
+* Use active_support/test_case instead of test/unit/test_case
+
 * Create initial gem structure
