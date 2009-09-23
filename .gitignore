@@ -1,0 +1,7 @@
+.DS_Store
+pkg
+doc
+tmp
+*.log
+*.gem
+tasks/authoring_helper.rake

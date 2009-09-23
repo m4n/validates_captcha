@@ -1,0 +1,40 @@
+= Validates Captcha
+
+An image captcha verification approach for Rails apps, directly integrated into ActiveRecord's validation mechanism.
+
+
+
+== Dependencies
+
+Validates Captcha requires Rails version >= 2.3.2
+
+
+
+== Download
+
+The latest version of Validates Captcha can be found at http://github.com/m4n/validates_captcha
+
+Documentation can be generated from its distribution directory with the following command.
+
+  % [sudo] rake rdoc
+
+
+
+== Installation
+
+You can install Validates Captcha with the following command.
+
+  % [sudo] gem install m4n-validates_captcha --source http://gems.github.com
+
+
+
+== License
+
+Validates Captcha is released under the MIT license.
+
+
+
+== Copyright
+
+Copyright (c) 2009 Martin Andert
+
