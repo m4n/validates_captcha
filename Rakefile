@@ -30,14 +30,8 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include 'MIT-LICENSE'
   rdoc.rdoc_files.include 'CHANGELOG'
   rdoc.rdoc_files.include 'lib/**/*.rb'
+  rdoc.rdoc_files.exclude 'lib/validates_captcha/test_case.rb'
   rdoc.rdoc_files.exclude 'lib/validates_captcha/version.rb'
-end
-
-namespace :rdoc do
-  desc 'Show documentation in Firefox browser'
-  task :show do
-    sh "firefox #{`pwd`.chomp}/doc/index.html"
-  end
 end
 
 require 'rake/testtask'
