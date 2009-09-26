@@ -201,6 +201,11 @@ following command.
 
   % [sudo] rake rdoc
 
+Tests can be executed  from its distribution directory with the 
+following command.
+
+  % [sudo] rake test
+
 
 
 == Installation

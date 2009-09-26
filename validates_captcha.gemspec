@@ -31,4 +31,4 @@ Gem::Specification.new do |spec|
     spec.add_dependency('activerecord', ['>= 2.3.2'])
   end
 end
- 
+
