@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ValidatesCaptcha::ImageGenerator::Simple [Validates Captcha]</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ValidatesCaptcha::ImageGenerator::Simple
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/lib/validates_captcha/image_generator/simple_rb.html">lib/validates_captcha/image_generator/simple.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong>Object</strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            This class is responsible for creating the captcha image. It internally
+            uses ImageMagick&#8217;s <tt>convert</tt> command to generate the image
+            bytes. So ImageMagick must be installed on the system for it to work
+            properly.
+            </p>
+            <p>
+            In order to deliver the captcha image to the user&#8217;s browser, Validate
+            Captcha&#8217;s Rack middleware calls the methods of this class to create
+            the image, to retrieve its mime type, and to construct the path to it.
+            </p>
+            <p>
+            The image generation process is no rocket science. The chars are just laid
+            out next to each other with varying vertical positions, font sizes, and
+            weights. Then a slight rotation is performed and some randomly positioned
+            lines are rendered on the canvas.
+            </p>
+            <p>
+            Sure, the created captcha can easily be cracked by intelligent bots. As the
+            name of the class suggests, it&#8217;s rather a starting point for your own
+            implementations.
+            </p>
+            <p>
+            You can implement your own (better) image generator by creating a class
+            that conforms to the method definitions of the example below and assign an
+            instance of it to <a
+            href="../../ValidatesCaptcha.html#M000003">ValidatesCaptcha#image_generator=</a>.
+            </p>
+            <p>
+            Example for a custom image generator:
+            </p>
+            <pre>class AdvancedImageGenerator&#x000A;  def generate(captcha_text)&#x000A;    # ... do your magic here ...&#x000A;&#x000A;    return string_containing_image_bytes&#x000A;  end&#x000A;&#x000A;  def image_mime_type&#x000A;    'image/png'&#x000A;  end&#x000A;&#x000A;  def image_file_extension&#x000A;    '.png'&#x000A;  end&#x000A;end&#x000A;&#x000A;ValidatesCaptcha.image_generator = AdvancedImageGenerator.new</pre>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000026">generate</a></li>
+              <li><a href="#M000028">image_file_extension</a></li>
+              <li><a href="#M000027">image_mime_type</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>MIME_TYPE</td>
+                    <td>=</td>
+                    <td class='context-item-value'>'image/gif'.freeze</td>
+                  </tr>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>FILE_EXTENSION</td>
+                    <td>=</td>
+                    <td class='context-item-value'>'.gif'.freeze</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='public-instance method' id='method-M000026'>
+                <a name='M000026'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>generate</span>
+                  <span class='arguments'>(captcha_code)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns a string containing the image bytes of the captcha. As the only
+                  argument, the cleartext captcha text must be passed.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000026-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000026-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 51</span>&#x000A;51:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate</span>(<span class="ruby-identifier">captcha_code</span>)&#x000A;52:         <span class="ruby-identifier">image_width</span> = <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">*</span> <span class="ruby-value">20</span> <span class="ruby-operator">+</span> <span class="ruby-value">10</span>&#x000A;53:         &#x000A;54:         <span class="ruby-identifier">cmd</span> = []&#x000A;55:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;convert -size #{image_width}x40 xc:grey84 -background grey84 -fill black &quot;</span>&#x000A;56:         &#x000A;57:         <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">char</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>&#x000A;58:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -pointsize #{rand(8) + 15} &quot;</span>&#x000A;59:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -weight #{rand(2) == 0 ? '4' : '8'}00 &quot;</span>&#x000A;60:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -draw 'text #{5 + 20 * i},#{rand(10) + 20} \&quot;#{char}\&quot;' &quot;</span>&#x000A;61:         <span class="ruby-keyword kw">end</span>&#x000A;62:         &#x000A;63:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  -rotate #{rand(2) == 0 ? '-' : ''}5 -fill grey40 &quot;</span>&#x000A;64:         &#x000A;65:         <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>&#x000A;66:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  -draw 'line #{rand(image_width)},0 #{rand(image_width)},60' &quot;</span>&#x000A;67:         <span class="ruby-keyword kw">end</span>&#x000A;68:         &#x000A;69:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;  gif:-&quot;</span>&#x000A;70:         &#x000A;71:         <span class="ruby-identifier">image_magick_command</span> = <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>&#x000A;72:         &#x000A;73:         <span class="ruby-node">`#{image_magick_command}`</span>&#x000A;74:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000028'>
+                <a name='M000028'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>image_file_extension</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns the image file extension. This is always &#8217;.gif&#8217;.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000028-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000028-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 82</span>&#x000A;82:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_file_extension</span>&#x000A;83:         <span class="ruby-constant">FILE_EXTENSION</span>&#x000A;84:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000027'>
+                <a name='M000027'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>image_mime_type</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns the image mime type. This is always &#8216;image/gif&#8217;.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000027-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000027-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 77</span>&#x000A;77:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_mime_type</span>&#x000A;78:         <span class="ruby-constant">MIME_TYPE</span>&#x000A;79:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

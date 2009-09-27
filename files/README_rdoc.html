@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: README.rdoc [Validates Captcha]</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <div class='name'>README.rdoc</div>
+        <div class='paths'>
+          README.rdoc
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>Sun Sep 27 15:06:17 +0200 2009</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <h1>Validates Captcha</h1>
+            <p>
+            An image captcha verification approach for Rails apps, directly integrated
+            into ActiveRecord&#8217;s validation mechanism and providing helpers for
+            ActionController and ActionView.
+            </p>
+            <h2>Basic Usage</h2>
+            <p>
+            Validates Captcha extends ActiveRecord, ActionController and ActionView
+            with helper methods that make it a snap to integrate captcha verification
+            in your Rails application.
+            </p>
+            <p>
+            Step 1: Extend the form of your view with the necessary captcha code
+            display and input logic.
+            </p>
+            <pre># app/views/comments/new.html.erb&#x000A;&lt;% form_for @comment do |f| %&gt;&#x000A;  &lt;%= f.error_messages %&gt;&#x000A;&#x000A;  &lt;!-- standard input fields: --&gt;&#x000A;  &lt;p&gt;&#x000A;    &lt;%= f.label :name %&gt;&lt;br /&gt;&#x000A;    &lt;%= f.text_field :name %&gt;&#x000A;  &lt;/p&gt;&#x000A;  &lt;!-- ... --&gt;&#x000A;&#x000A;  &lt;!-- now something new: --&gt;&#x000A;  &lt;p&gt;&#x000A;    &lt;%= f.label :captcha %&gt;&lt;br /&gt;&#x000A;    &lt;%= f.captcha_image %&gt;&#x000A;    &lt;%= f.captcha_field %&gt;&#x000A;  &lt;/p&gt;&#x000A;&#x000A;  &lt;p&gt;&#x000A;    &lt;%= f.submit 'Create' %&gt;&#x000A;  &lt;/p&gt;&#x000A;&lt;% end %&gt;</pre>
+            <p>
+            Step 2: Tell the controller that you want to validate captchas.
+            </p>
+            <pre>class CommentsController &lt; ApplicationController&#x000A;  validates_captcha&#x000A;&#x000A;  def create&#x000A;    # scaffold comment creation code ...&#x000A;  end&#x000A;&#x000A;  # more actions here ...&#x000A;end</pre>
+            <p>
+            This activates captcha validation in every action of the controller
+            whenever an instance of class <tt>Comment</tt> is saved.
+            </p>
+            <p>
+            Step 3: There&#8217;s no step three!
+            </p>
+            <p>
+            To summarize: Put the following in your view.
+            </p>
+            <pre>&lt;%= f.captcha_image %&gt;&#x000A;&lt;%= f.captcha_field %&gt;</pre>
+            <p>
+            And what you see below in the corresponding controller.
+            </p>
+            <pre>validates_captcha</pre>
+            <p>
+            Done.
+            </p>
+            <h2>Customization</h2>
+            <p>
+            Because the <tt>validates_captcha</tt> controller method internally creates
+            an around filter, you can (de)activate captcha validation for specific
+            actions.
+            </p>
+            <pre>validates_captcha :only =&gt; [:create, :update]&#x000A;validates_captcha :except =&gt; :reset</pre>
+            <p>
+            The class for which captcha validation is activated is derived from the
+            name of the controller. So putting <tt>validates_captcha</tt> in a
+            <tt>UsersController</tt> validates instances of the <tt>User</tt> class.
+            </p>
+            <p>
+            You can customize the validated class using the
+            <tt>validates_captcha_of</tt> method.
+            </p>
+            <pre>class ArticlesController &lt; ApplicationController&#x000A;  validates_captcha_of Post&#x000A;  validates_captcha_of :blog_entries, :except =&gt; :persist&#x000A;  validates_captcha_of 'users', :only =&gt; :store&#x000A;end</pre>
+            <p>
+            Two kinds of errors are added to the model if captcha validation fails:
+            <tt>:blank</tt> if no captcha code is submitted and <tt>:invalid</tt> if a
+            captcha code is submitted but does not match the code displayed on the
+            captcha image. You can localize the error messages for the captcha as you
+            usually do for the other attributes.
+            </p>
+            <pre>models:&#x000A;  comment:&#x000A;    attributes:&#x000A;      captcha:&#x000A;        blank: 'must not be empty'&#x000A;        invalid: 'does not match the code displayed on the image'</pre>
+            <p>
+            What if the captcha&#8217;s text is unreadable? There&#8217;s also a form
+            helper method for captcha regeneration available. You can call it like
+            this.
+            </p>
+            <pre>&lt;p&gt;&#x000A;  Captcha code unreadable? &lt;%= f.regenerate_captcha_link %&gt;&#x000A;&lt;/p&gt;</pre>
+            <p>
+            This generates an anchor tag that, when clicked, generates a new captcha
+            and updates the image. It makes an AJAX request to fetch a new captcha code
+            and updates the captcha image after the request is complete.
+            </p>
+            <p>
+            <tt>regenerate_captcha_link</tt> internally calls Rails&#8217;
+            link_to_remote helper method. So it relies on the Prototype javascript
+            framework to be available on the page.
+            </p>
+            <p>
+            The anchor&#8217;s text defaults to &#8216;Regenerate Captcha&#8217;. You
+            can set this to a custom value by providing a <tt>:text</tt> key in the
+            options hash.
+            </p>
+            <pre>&lt;%= f.regenerate_captcha_link :text =&gt; 'Another captcha, please' %&gt;</pre>
+            <p>
+            By default, captchas have a length of 6 characters and the text displayed
+            on the captcha image is created by randomly selecting characters from a
+            predefined alphabet constisting of visually distinguishable letters and
+            digits.
+            </p>
+            <p>
+            The number of characters and the alphabet used when generating strings can
+            be customized. Just put the following in a Rails initializer and adjust the
+            values to your needs.
+            </p>
+            <pre>ValidatesCaptcha::StringGenerator::Simple.alphabet = '01'&#x000A;ValidatesCaptcha::StringGenerator::Simple.length = 8</pre>
+            <p>
+            Apart from controllers, you can activate captcha validation for a model
+            using the class level <tt>with_captcha_validation</tt> method added to
+            ActiveRecord::Base.
+            </p>
+            <pre>Comment.with_captcha_validation do&#x000A;  @comment = Comment.new(...)&#x000A;  @comment.save&#x000A;end</pre>
+            <p>
+            This activates captcha validation on entering the block and deactivates it
+            on leaving the block.
+            </p>
+            <p>
+            Two new attribute like methods are added to ActiveRecord: <tt>captcha</tt>
+            and <tt>encrypted_captcha</tt>. Those are made <tt>attr_accessible</tt>.
+            The latter is initialized to a randomly generated and encrypted captcha
+            code on instantation.
+            </p>
+            <p>
+            For a record to be valid, the value assigned to <tt>captcha=</tt> must
+            match the decryption of the return value of <tt>encrypted_captcha</tt>.
+            Within a <tt>with_captcha_validation</tt> block, calling <tt>valid?</tt>
+            (as is done by <tt>save</tt>, <tt>update_attributes</tt>, etc.) will also
+            validate the value of <tt>captcha</tt> against the
+            <tt>encrypted_captcha</tt>. Outside <tt>with_captcha_validation</tt>, no
+            captcha validation is performed.
+            </p>
+            <h2>Extensibility</h2>
+            <p>
+            Validates Captcha delegates tasks like string and image generation,
+            encryption/decryption of captcha codes, and responding to captcha requests
+            to dedicated backend classes.
+            </p>
+            <p>
+            Those classes can easily be replaced by your custom implementations. So you
+            can achieve stronger encryption, can use a word list as captcha text
+            generation source, or can replace the captcha image generator with one that
+            creates images that are harder to crack.
+            </p>
+            <p>
+            Please see the documentation of the following classes for further
+            information.
+            </p>
+            <ul>
+            <li><a
+            href="../classes/ValidatesCaptcha/StringGenerator/Simple.html">ValidatesCaptcha::StringGenerator::Simple</a>
+            
+            </li>
+            <li><a
+            href="../classes/ValidatesCaptcha/ReversibleEncrypter/Simple.html">ValidatesCaptcha::ReversibleEncrypter::Simple</a>
+            
+            </li>
+            <li><a
+            href="../classes/ValidatesCaptcha/ImageGenerator/Simple.html">ValidatesCaptcha::ImageGenerator::Simple</a>
+            
+            </li>
+            <li><a
+            href="../classes/ValidatesCaptcha/Middleware/Simple.html">ValidatesCaptcha::Middleware::Simple</a>
+            
+            </li>
+            </ul>
+            <h2>Dependencies</h2>
+            <p>
+            Using a Rack middleware to speed up the request/response cycle when
+            fetching captcha images, Validates Captcha requires Rails version 2.3 or
+            greater.
+            </p>
+            <p>
+            The default captcha image generator uses ImageMagick&#8217;s
+            <tt>convert</tt> command to create the captcha. So a recent and properly
+            configured version of ImageMagick must be installed on the system. The
+            version used while developing was 6.4.5. But you are not bound to
+            ImageMagick. If you want to provide a custom image generator, take a look
+            at the documentation for <a
+            href="../classes/ValidatesCaptcha/ImageGenerator/Simple.html">ValidatesCaptcha::ImageGenerator::Simple</a>
+            on how to create your own.
+            </p>
+            <h2>Download</h2>
+            <p>
+            The latest version of Validates Captcha can be found at <a
+            href="http://github.com/m4n/validates_captcha">github.com/m4n/validates_captcha</a>
+            </p>
+            <p>
+            Documentation can be generated from its distribution directory with the
+            following command.
+            </p>
+            <pre>% [sudo] rake rdoc</pre>
+            <p>
+            Tests can be executed from its distribution directory with the following
+            command.
+            </p>
+            <pre>% [sudo] rake test</pre>
+            <h2>Installation</h2>
+            <p>
+            You can install Validates Captcha as a Rails plugin with the following
+            command.
+            </p>
+            <pre>% ./script/plugin install git://github.com/m4n/validates_captcha.git</pre>
+            <p>
+            Or you can install it as a Gem with
+            </p>
+            <pre>% [sudo] gem install m4n-validates_captcha --source http://gems.github.com</pre>
+            <p>
+            and then configure it in your <tt>environment.rb</tt> file as shown below.
+            </p>
+            <pre>Rails::Initializer.run do |config|&#x000A;  # ...&#x000A;  config.gem 'm4n-validates_captcha', :lib =&gt; 'validates_captcha'&#x000A;  # ...&#x000A;end</pre>
+            <h2>License</h2>
+            <p>
+            Validates Captcha is released under the MIT license.
+            </p>
+            <h2>Copyright</h2>
+            <p>
+            Copyright &#169; 2009 Martin Andert
+            </p>
+          </div>
+          <div id='section'>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ValidatesCaptcha::Middleware::Simple [Validates Captcha]</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ValidatesCaptcha::Middleware::Simple
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/lib/validates_captcha/middleware/simple_rb.html">lib/validates_captcha/middleware/simple.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong>Object</strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            This class acts as the Rack middleware that serves the captcha images.
+            </p>
+            <p>
+            You can implement your own middleware by creating a class that conforms to
+            the method definitions of the example below and assign an instance of it to
+            <a
+            href="../../ValidatesCaptcha.html#M000009">ValidatesCaptcha#middleware=</a>.
+            </p>
+            <p>
+            Example for a custom middleware:
+            </p>
+            <pre>class MyMiddleware&#x000A;  def image_path(encrypted_code)&#x000A;    '/captchas/image/' + encrypted_code + ValidatesCaptcha.captcha_image_file_extension&#x000A;  end&#x000A;&#x000A;  def regenerate_path&#x000A;    '/captchas/regenerate'&#x000A;  end&#x000A;&#x000A;  def call(env)&#x000A;    if env['PATH_INFO'] =~ /^\/captchas\/image\/([^\.]+)/&#x000A;      decrypted_code = ValidatesCaptcha.decrypt_captcha_code($1)&#x000A;&#x000A;      if decrypted_code.nil?&#x000A;        [422, { 'Content-Type' =&gt; 'text/html' }, ['Unprocessable Entity']]&#x000A;      else&#x000A;        image_data = ValidatesCaptcha.generate_captcha_image(decrypted_code)&#x000A;&#x000A;        headers = {&#x000A;          'Content-Length'            =&gt; image_data.bytesize.to_s,&#x000A;          'Content-Type'              =&gt; ValidatesCaptcha.captcha_image_mime_type,&#x000A;          'Content-Disposition'       =&gt; 'inline',&#x000A;          'Content-Transfer-Encoding' =&gt; 'binary'&#x000A;        }&#x000A;&#x000A;        [200, headers, [image_data]]&#x000A;      end&#x000A;    elsif env['PATH_INFO'] == regenerate_path&#x000A;      encrypted_code = ValidatesCaptcha.encrypt_captcha_code(ValidatesCaptcha.generate_captcha_code)&#x000A;      xml = { :encrypted_captcha_code =&gt; encrypted_code, :captcha_image_path =&gt; image_path(encrypted_code) }.to_xml&#x000A;&#x000A;      [200, { 'Content-Type' =&gt; 'application/xml' }, [xml]]&#x000A;    else&#x000A;      [404, { 'Content-Type' =&gt; 'text/html' }, ['Not Found']]&#x000A;    end&#x000A;  end&#x000A;end&#x000A;&#x000A;ValidatesCaptcha.middleware = MyMiddleware.new</pre>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000036">call</a></li>
+              <li><a href="#M000034">image_path</a></li>
+              <li><a href="#M000035">regenerate_path</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='public-instance method' id='method-M000036'>
+                <a name='M000036'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>call</span>
+                  <span class='arguments'>(env)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  This method is the one called by Rack.
+                  </p>
+                  <p>
+                  It returns HTTP status 404 if the path is not recognized. If the path is
+                  recognized, it returns HTTP status 200 and delivers the image if it could
+                  successfully decrypt the captcha code, otherwise HTTP status 422.
+                  </p>
+                  <p>
+                  Please take a look at the source code if you want to learn more.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000036-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000036-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/middleware/simple.rb, line 76</span>&#x000A; 76:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)&#x000A; 77:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">env</span>[<span class="ruby-value str">'PATH_INFO'</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\/captchas\/([^\.]+)/</span>&#x000A; 78:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$1</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'regenerate'</span>&#x000A; 79:             <span class="ruby-identifier">encrypted_code</span> = <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">encrypt_captcha_code</span>(<span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">generate_captcha_code</span>)&#x000A; 80:             <span class="ruby-identifier">json</span> = { <span class="ruby-identifier">:encrypted_captcha_code</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">encrypted_code</span>, <span class="ruby-identifier">:captcha_image_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">image_path</span>(<span class="ruby-identifier">encrypted_code</span>) }.<span class="ruby-identifier">to_json</span>&#x000A; 81:             &#x000A; 82:             [<span class="ruby-value">200</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'application/json'</span> }, [<span class="ruby-identifier">json</span>]]&#x000A; 83:           <span class="ruby-keyword kw">else</span>&#x000A; 84:             <span class="ruby-identifier">decrypted_code</span> = <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">decrypt_captcha_code</span>(<span class="ruby-identifier">$1</span>)&#x000A; 85:           &#x000A; 86:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">decrypted_code</span>.<span class="ruby-identifier">nil?</span>&#x000A; 87:               [<span class="ruby-value">422</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/html'</span> }, [<span class="ruby-value str">'Unprocessable Entity'</span>]]&#x000A; 88:             <span class="ruby-keyword kw">else</span>&#x000A; 89:               <span class="ruby-identifier">image_data</span> = <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">generate_captcha_image</span>(<span class="ruby-identifier">decrypted_code</span>)&#x000A; 90:               &#x000A; 91:               <span class="ruby-identifier">response_headers</span> = {&#x000A; 92:                 <span class="ruby-value str">'Content-Length'</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">image_data</span>.<span class="ruby-identifier">bytesize</span>.<span class="ruby-identifier">to_s</span>,&#x000A; 93:                 <span class="ruby-value str">'Content-Type'</span>              =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">captcha_image_mime_type</span>,&#x000A; 94:                 <span class="ruby-value str">'Content-Disposition'</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'inline'</span>,&#x000A; 95:                 <span class="ruby-value str">'Content-Transfer-Encoding'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'binary'</span>,&#x000A; 96:                 <span class="ruby-value str">'Cache-Control'</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'private'</span>&#x000A; 97:               }&#x000A; 98:               &#x000A; 99:               [<span class="ruby-value">200</span>, <span class="ruby-identifier">response_headers</span>, [<span class="ruby-identifier">image_data</span>]]&#x000A;100:             <span class="ruby-keyword kw">end</span>&#x000A;101:           <span class="ruby-keyword kw">end</span>&#x000A;102:         <span class="ruby-keyword kw">else</span>&#x000A;103:           [<span class="ruby-value">404</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/html'</span> }, [<span class="ruby-value str">'Not Found'</span>]]&#x000A;104:         <span class="ruby-keyword kw">end</span>&#x000A;105:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000034'>
+                <a name='M000034'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>image_path</span>
+                  <span class='arguments'>(encrypted_code)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns the captcha image path for a given encrypted code.
+                  </p>
+                  <p>
+                  This is used by the <tt>captcha_image</tt> form helper.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000034-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000034-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/middleware/simple.rb, line 57</span>&#x000A;57:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_path</span>(<span class="ruby-identifier">encrypted_code</span>)&#x000A;58:         <span class="ruby-node">&quot;/captchas/#{encrypted_code}#{ValidatesCaptcha.captcha_image_file_extension}&quot;</span>&#x000A;59:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000035'>
+                <a name='M000035'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>regenerate_path</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns the path that is used when requesting the regeneration of a captcha
+                  image. Defaults to &#8216;/captchas/regenerate&#8217;.
+                  </p>
+                  <p>
+                  This is used by the <tt>regenerate_captcha_link</tt> form helper.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000035-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000035-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/middleware/simple.rb, line 65</span>&#x000A;65:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regenerate_path</span>&#x000A;66:         <span class="ruby-value str">'/captchas/regenerate'</span>&#x000A;67:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>
