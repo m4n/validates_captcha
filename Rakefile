@@ -28,7 +28,7 @@ Rake::RDocTask.new do |rdoc|
   
   rdoc.rdoc_files.include 'README.rdoc'
   rdoc.rdoc_files.include 'MIT-LICENSE'
-  rdoc.rdoc_files.include 'CHANGELOG'
+  rdoc.rdoc_files.include 'CHANGELOG.rdoc'
   rdoc.rdoc_files.include 'lib/**/*.rb'
   rdoc.rdoc_files.exclude 'lib/validates_captcha/test_case.rb'
   rdoc.rdoc_files.exclude 'lib/validates_captcha/version.rb'
