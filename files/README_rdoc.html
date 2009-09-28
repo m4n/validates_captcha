@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Sun Sep 27 15:47:57 +0200 2009</span>
+          <span class='datetime'>Mon Sep 28 10:03:04 +0200 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -214,6 +214,20 @@
             href="../classes/ValidatesCaptcha/ImageGenerator/Simple.html">ValidatesCaptcha::ImageGenerator::Simple</a>
             on how to create your own.
             </p>
+            <h2>Installation</h2>
+            <p>
+            You can install Validates Captcha as a Gem with
+            </p>
+            <pre>% [sudo] gem install validates_captcha</pre>
+            <p>
+            and then configure it in your <tt>environment.rb</tt> file as shown below.
+            </p>
+            <pre>Rails::Initializer.run do |config|&#x000A;  # ...&#x000A;  config.gem 'validates_captcha'&#x000A;  # ...&#x000A;end</pre>
+            <p>
+            Or you can install it as a Rails plugin (discouraged) with the following
+            command.
+            </p>
+            <pre>% ./script/plugin install git://github.com/m4n/validates_captcha.git</pre>
             <h2>Download</h2>
             <p>
             The latest version of Validates Captcha can be found at <a
@@ -229,20 +243,18 @@
             command.
             </p>
             <pre>% [sudo] rake test</pre>
-            <h2>Installation</h2>
+            <h2>Hacking</h2>
             <p>
-            You can install Validates Captcha as a Rails plugin with the following
-            command.
+            Validates Captcha is <a
+            href="http://github.com/m4n/validates_captcha">hosted on Github</a>. Pull
+            requests are welcome.
             </p>
-            <pre>% ./script/plugin install git://github.com/m4n/validates_captcha.git</pre>
+            <h2>Bugs</h2>
             <p>
-            Or you can install it as a Gem with
+            Please report bugs on the <a
+            href="http://github.com/m4n/validates_captcha/issues">Github issue
+            tracker</a> for this project.
             </p>
-            <pre>% [sudo] gem install m4n-validates_captcha --source http://gems.github.com</pre>
-            <p>
-            and then configure it in your <tt>environment.rb</tt> file as shown below.
-            </p>
-            <pre>Rails::Initializer.run do |config|&#x000A;  # ...&#x000A;  config.gem 'm4n-validates_captcha', :lib =&gt; 'validates_captcha'&#x000A;  # ...&#x000A;end</pre>
             <h2>License</h2>
             <p>
             Validates Captcha is released under the MIT license.
