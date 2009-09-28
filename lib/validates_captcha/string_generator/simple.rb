@@ -10,7 +10,7 @@ module ValidatesCaptcha
     #
     # You can implement your own string generator by creating a 
     # class that conforms to the method definitions of the example below and 
-    # assign an instance of it to ValidatesCaptcha#string_generator=.
+    # assign an instance of it to ValidatesCaptcha::Provider::Image#string_generator=.
     #
     # Example for a custom string generator:
     #
@@ -22,7 +22,8 @@ module ValidatesCaptcha
     #    end
     #  end
     #
-    #  ValidatesCaptcha.string_generator = DictionaryGenerator.new
+    #  ValidatesCaptcha::Provider::Image.string_generator = DictionaryGenerator.new
+    #  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
     #    
     class Simple
       @@alphabet = 'abdefghjkmnqrtABDEFGHJKLMNQRT234678923467892346789'

@@ -1,7 +1,7 @@
 require 'test_helper'
-
+ 
 RE = ValidatesCaptcha::ReversibleEncrypter::Simple
-
+ 
 class ReversibleEncrypterTest < ValidatesCaptcha::TestCase
   test "defines an instance level #encrypt method" do
     assert_respond_to RE.new, :encrypt
@@ -25,3 +25,4 @@ class ReversibleEncrypterTest < ValidatesCaptcha::TestCase
     end
   end
 end
+

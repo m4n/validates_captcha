@@ -112,3 +112,4 @@ class StringGeneratorTest < ValidatesCaptcha::TestCase
     SG.alphabet = old_alphabet    
   end
 end
+

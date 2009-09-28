@@ -8,7 +8,7 @@ module ValidatesCaptcha
     #
     # You can implement your own reversible encrypter by creating a class 
     # that conforms to the method definitions of the example below and 
-    # assign an instance of it to ValidatesCaptcha#reversible_encrypter=.
+    # assign an instance of it to ValidatesCaptcha::Provider::Image#reversible_encrypter=.
     #
     # Example for a custom encrypter/decrypter:
     #
@@ -24,7 +24,8 @@ module ValidatesCaptcha
     #    end
     #  end
     #
-    #  ValidatesCaptcha.reversible_encrypter = ReverseString.new
+    #  ValidatesCaptcha::Provider::Image.reversible_encrypter = ReverseString.new
+    #  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
     #
     # Please note: The #decrypt method should return +nil+ if decryption fails. 
     class Simple

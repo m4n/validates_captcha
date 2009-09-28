@@ -20,7 +20,7 @@ module ValidatesCaptcha
     #
     # You can implement your own (better) image generator by creating a 
     # class that conforms to the method definitions of the example below and 
-    # assign an instance of it to ValidatesCaptcha#image_generator=.
+    # assign an instance of it to ValidatesCaptcha::Provider::Image#image_generator=.
     #
     # Example for a custom image generator:
     #
@@ -31,16 +31,17 @@ module ValidatesCaptcha
     #      return string_containing_image_bytes
     #    end
     #
-    #    def image_mime_type
+    #    def mime_type
     #      'image/png'
     #    end
     #
-    #    def image_file_extension
+    #    def file_extension
     #      '.png'
     #    end
     #  end
     #
-    #  ValidatesCaptcha.image_generator = AdvancedImageGenerator.new
+    #  ValidatesCaptcha::Provider::Image.image_generator = AdvancedImageGenerator.new
+    #  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
     #    
     class Simple
       MIME_TYPE = 'image/gif'.freeze
@@ -74,12 +75,12 @@ module ValidatesCaptcha
       end
       
       # Returns the image mime type. This is always 'image/gif'.
-      def image_mime_type
+      def mime_type
         MIME_TYPE
       end
       
       # Returns the image file extension. This is always '.gif'.
-      def image_file_extension
+      def file_extension
         FILE_EXTENSION
       end
     end

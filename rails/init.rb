@@ -16,7 +16,7 @@ module ::ValidatesCaptcha
     end
     
     def call(env)
-      result = ValidatesCaptcha.middleware.call(env)
+      result = ValidatesCaptcha.provider.call(env)
       
       return @app.call(env) unless RECOGNIZED_RESPONSE_STATUS_CODES.include?(result.first)
       

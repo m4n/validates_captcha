@@ -1,42 +1,56 @@
 require 'test_helper'
 
 class ModelValidationTest < ValidatesCaptcha::TestCase
-  test "defines an accessible attribute named +captcha+" do
-    assert Widget.accessible_attributes.include?('captcha')
+  def with_image_provider(&block)
+    old_provider = ValidatesCaptcha.provider
+    provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
+    yield provider
+    ValidatesCaptcha.provider = old_provider
   end
   
-  test "defines an instance level #captcha method" do
-    assert_respond_to Widget.new, :captcha
+  def with_question_provider(&block)
+    old_provider = ValidatesCaptcha.provider
+    provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Question.new
+    yield provider
+    ValidatesCaptcha.provider = old_provider
   end
   
-  test "defines a instance level #captcha= method" do
-    assert_respond_to Widget.new, :captcha=
+  test "defines an accessible attribute named +captcha_solution+" do
+    assert Widget.accessible_attributes.include?('captcha_solution')
   end
   
-  test "assigned value to #captcha= should equal return value of #captcha" do
+  test "defines an instance level #captcha_solution method" do
+    assert_respond_to Widget.new, :captcha_solution
+  end
+  
+  test "defines a instance level #captcha_solution= method" do
+    assert_respond_to Widget.new, :captcha_solution=
+  end
+  
+  test "assigned value to #captcha_solution= should equal return value of #captcha_solution" do
     widget = Widget.new
-    widget.captcha = 'abc123'
+    widget.captcha_solution = 'abc123'
     
-    assert_equal 'abc123', widget.captcha
+    assert_equal 'abc123', widget.captcha_solution
   end
   
-  test "defines an accessible attribute named +encrypted_captcha+" do
-    assert Widget.accessible_attributes.include?('encrypted_captcha')
+  test "defines an accessible attribute named +captcha_challenge+" do
+    assert Widget.accessible_attributes.include?('captcha_challenge')
   end
   
-  test "defines an instance level #encrypted_captcha method" do
-    assert_respond_to Widget.new, :encrypted_captcha
+  test "defines an instance level #captcha_challenge method" do
+    assert_respond_to Widget.new, :captcha_challenge
   end
   
-  test "defines an instance level #encrypted_captcha= method" do
-    assert_respond_to Widget.new, :encrypted_captcha=
+  test "defines an instance level #captcha_challenge= method" do
+    assert_respond_to Widget.new, :captcha_challenge=
   end
   
-  test "value assigned to #encrypted_captcha= should equal return value of #encrypted_captcha" do
+  test "value assigned to #captcha_challenge= should equal return value of #captcha_challenge" do
     widget = Widget.new
-    widget.encrypted_captcha = 'asdfghjk3456789'
+    widget.captcha_challenge = 'asdfghjk3456789'
     
-    assert_equal 'asdfghjk3456789', widget.encrypted_captcha
+    assert_equal 'asdfghjk3456789', widget.captcha_challenge
   end
   
   test "defines #validate_captcha method callback of kind +validate+" do
@@ -47,84 +61,143 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
     assert_respond_to Widget, :with_captcha_validation
   end
   
-  test "not within a #with_captcha_validation block, calling valid? should return true if no captcha is set" do
+  test "not within a #with_captcha_validation block, calling valid? should return true if no captcha_solution is set" do
     widget = Widget.new
+    widget.captcha_solution = nil
     
     assert widget.valid?
   end
   
-  test "not within a #with_captcha_validation block, calling valid? should return true if an empty captcha is set" do
+  test "not within a #with_captcha_validation block, calling valid? should return true if an empty captcha_solution is set" do
     widget = Widget.new
-    widget.captcha = '   '
+    widget.captcha_solution = '   '
     
     assert widget.valid?
   end
   
-  test "not within a #with_captcha_validation block, calling valid? should return true if an invalid captcha is set" do
-    widget = Widget.new
-    widget.captcha = 'J§$%ZT&/ÖGHJ'
-    
-    assert widget.valid?
-  end
-  
-  test "not within a #with_captcha_validation block, calling valid? should return true if a valid captcha is set" do
-    widget = Widget.new
-    widget.captcha = ValidatesCaptcha.decrypt_captcha_code(widget.encrypted_captcha)
-    
-    assert widget.valid?
-  end
-  
-  test "within a #with_captcha_validation block, calling valid? should return false if no captcha is set" do
-    Widget.with_captcha_validation do
+  test "not within a #with_captcha_validation block, calling valid? should return true if an invalid captcha_solution is set" do
+    with_image_provider do |provider|
       widget = Widget.new
+      widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge).reverse
       
-      assert !widget.valid?
-      assert_equal 1, Array.wrap(widget.errors[:captcha]).size
-      assert Array.wrap(widget.errors[:captcha]).first.include?('blank')
+      assert widget.valid?
     end
-  end
-  
-  test "within a #with_captcha_validation block, calling valid? should return false if an empty captcha is set" do
-    Widget.with_captcha_validation do
+    
+    with_question_provider do |provider|
       widget = Widget.new
-      widget.captcha = '   '
-      
-      assert !widget.valid?
-      assert_equal 1, Array.wrap(widget.errors[:captcha]).size
-      assert Array.wrap(widget.errors[:captcha]).first.include?('blank')
-    end
-  end
-  
-  test "within a #with_captcha_validation block, calling valid? should return false if an invalid captcha is set" do
-    Widget.with_captcha_validation do
-      widget = Widget.new
-      widget.captcha = 'J§$%ZT&/ÖGHJ'
-      
-      assert !widget.valid?
-      assert_equal 1, Array.wrap(widget.errors[:captcha]).size
-      assert Array.wrap(widget.errors[:captcha]).first.include?('invalid')
-    end
-  end
-  
-  test "within a #with_captcha_validation block, calling valid? should return true if a valid captcha is set" do
-    Widget.with_captcha_validation do
-      widget = Widget.new
-      widget.captcha = ValidatesCaptcha.decrypt_captcha_code(widget.encrypted_captcha)
+      widget.captcha_solution = '---'
       
       assert widget.valid?
     end
   end
   
-  test "with #with_captcha_validation block, calling valid? before and after the block should return true if valid? returned false within block" do
-    widget = Widget.new
-    widget.captcha = 'J§$%ZT&/ÖGHJ'
-    
-    assert widget.valid?
-    
-    Widget.with_captcha_validation do
-      assert !widget.valid?
+  test "not within a #with_captcha_validation block, calling valid? should return true if a valid captcha_solution is set" do
+    with_image_provider do |provider|
+      widget = Widget.new
+      widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge)
+      
+      assert widget.valid?
     end
     
-    assert widget.valid?
+    with_question_provider do |provider|
+      widget = Widget.new
+      widget.captcha_solution = provider.send(:solve, widget.captcha_challenge)
+      
+      assert widget.valid?
+    end
+  end
+  
+  test "within a #with_captcha_validation block, calling valid? should return false if no captcha_solution is set" do
+    Widget.with_captcha_validation do
+      widget = Widget.new
+      widget.captcha_solution = nil
+      
+      assert !widget.valid?
+      assert_equal 1, Array.wrap(widget.errors[:captcha_solution]).size
+      assert Array.wrap(widget.errors[:captcha_solution]).first.include?('blank')
+    end
+  end
+  
+  test "within a #with_captcha_validation block, calling valid? should return false if an empty captcha_solution is set" do
+    Widget.with_captcha_validation do
+      widget = Widget.new
+      widget.captcha_solution = '   '
+      
+      assert !widget.valid?
+      assert_equal 1, Array.wrap(widget.errors[:captcha_solution]).size
+      assert Array.wrap(widget.errors[:captcha_solution]).first.include?('blank')
+    end
+  end
+  
+  test "within a #with_captcha_validation block, calling valid? should return false if an invalid captcha_solution is set" do
+    with_image_provider do |provider|
+      Widget.with_captcha_validation do
+        widget = Widget.new
+        widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge).reverse
+        
+        assert !widget.valid?
+        assert_equal 1, Array.wrap(widget.errors[:captcha_solution]).size
+        assert Array.wrap(widget.errors[:captcha_solution]).first.include?('invalid')
+      end
+    end
+    
+    with_question_provider do |provider|
+      Widget.with_captcha_validation do
+        widget = Widget.new
+        widget.captcha_solution = '---'
+        
+        assert !widget.valid?
+        assert_equal 1, Array.wrap(widget.errors[:captcha_solution]).size
+        assert Array.wrap(widget.errors[:captcha_solution]).first.include?('invalid')
+      end
+    end
+  end
+  
+  test "within a #with_captcha_validation block, calling valid? should return true if a valid captcha_solution is set" do
+    with_image_provider do |provider|
+      Widget.with_captcha_validation do
+        widget = Widget.new
+        widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge)
+        
+        assert widget.valid?
+      end
+    end
+    
+    with_question_provider do |provider|
+      Widget.with_captcha_validation do
+        widget = Widget.new
+        widget.captcha_solution = provider.send(:solve, widget.captcha_challenge)
+        
+        assert widget.valid?
+      end
+    end
+  end
+  
+  test "with #with_captcha_validation block, calling valid? before and after the block should return true if valid? returned false within block" do
+    with_image_provider do |provider|
+      widget = Widget.new
+      widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge).reverse
+      
+      assert widget.valid?
+      
+      Widget.with_captcha_validation do
+        assert !widget.valid?
+      end
+      
+      assert widget.valid?
+    end
+    
+    with_question_provider do |provider|
+      widget = Widget.new
+      widget.captcha_solution = '---'
+      
+      assert widget.valid?
+      
+      Widget.with_captcha_validation do
+        assert !widget.valid?
+      end
+      
+      assert widget.valid?
+    end
   end
 end

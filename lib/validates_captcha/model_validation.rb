@@ -5,9 +5,9 @@ module ValidatesCaptcha
       base.send :include, InstanceMethods
       
       base.class_eval do
-        attr_accessible :captcha, :encrypted_captcha
-        attr_accessor :captcha
-        attr_writer :encrypted_captcha
+        attr_accessible :captcha_challenge, :captcha_solution
+        attr_accessor :captcha_solution
+        attr_writer :captcha_challenge
         
         validate :validate_captcha, :if => :validate_captcha?
       end
@@ -42,9 +42,9 @@ module ValidatesCaptcha
     end
     
     module InstanceMethods #:nodoc:
-      def encrypted_captcha #:nodoc:
-        return @encrypted_captcha unless @encrypted_captcha.blank?
-        @encrypted_captcha = ValidatesCaptcha.encrypt_captcha_code(ValidatesCaptcha.generate_captcha_code)
+      def captcha_challenge #:nodoc:
+        return @captcha_challenge unless @captcha_challenge.blank?
+        @captcha_challenge = ValidatesCaptcha.provider.generate_challenge
       end
       
       private      
@@ -53,12 +53,12 @@ module ValidatesCaptcha
         end
         
         def validate_captcha #:nodoc:
-          errors.add(:captcha, :blank) and return if captcha.blank?
-          errors.add(:captcha, :invalid) unless captcha_valid?
+          errors.add(:captcha_solution, :blank) and return if captcha_solution.blank?
+          errors.add(:captcha_solution, :invalid) unless captcha_valid?
         end
       
         def captcha_valid? #:nodoc:
-          ValidatesCaptcha.encrypt_captcha_code(captcha) == encrypted_captcha
+          ValidatesCaptcha.provider.solved?(captcha_challenge, captcha_solution)
         end        
     end
   end

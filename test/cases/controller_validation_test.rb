@@ -33,11 +33,8 @@ class WidgetsController < ActionController::Base
   end
   
   def save
-    encrypted = ValidatesCaptcha.encrypt_captcha_code('take this')
-    decrypted = ValidatesCaptcha.decrypt_captcha_code(encrypted)
-    
     begin
-      Widget.create! :captcha => decrypted, :encrypted_captcha => encrypted
+      Widget.create! params['widget']
     rescue ActiveRecord::RecordInvalid
       @invalid = true
     end
@@ -46,11 +43,8 @@ class WidgetsController < ActionController::Base
   end
   
   def store
-    encrypted = ValidatesCaptcha.encrypt_captcha_code('take this')
-    decrypted = ValidatesCaptcha.decrypt_captcha_code(encrypted) + 'ha!'
-    
     begin
-      Widget.create! :captcha => decrypted, :encrypted_captcha => encrypted
+      Widget.create! params['widget']
     rescue ActiveRecord::RecordInvalid
       @invalid = true
     end
@@ -59,11 +53,8 @@ class WidgetsController < ActionController::Base
   end
   
   def persist
-    encrypted = ValidatesCaptcha.encrypt_captcha_code('take this')
-    decrypted = ValidatesCaptcha.decrypt_captcha_code(encrypted) + 'ha!'
-    
     begin
-      Widget.create! :captcha => decrypted, :encrypted_captcha => encrypted
+      Widget.create! params['widget']
     rescue ActiveRecord::RecordInvalid
       @invalid = true
     end
@@ -85,6 +76,20 @@ end
 class ControllerValidationTest < ActionController::TestCase
   tests WidgetsController
   
+  def with_image_provider(&block)
+    old_provider = ValidatesCaptcha.provider
+    provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
+    yield provider
+    ValidatesCaptcha.provider = old_provider
+  end
+  
+  def with_question_provider(&block)
+    old_provider = ValidatesCaptcha.provider
+    provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Question.new
+    yield provider
+    ValidatesCaptcha.provider = old_provider
+  end
+  
   test "defines a class level #validates_captcha method" do
     assert_respond_to WidgetsController, :validates_captcha
   end
@@ -104,22 +109,74 @@ class ControllerValidationTest < ActionController::TestCase
   end
   
   test "calling #save method of controller should not assign @invalid" do
-    post :save
-    assert_nil assigns(:invalid)
+    with_image_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = provider.send(:decrypt, challenge)
+      
+      post :save, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_nil assigns(:invalid)
+    end
+    
+    with_question_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = provider.send(:solve, challenge)
+      
+      post :save, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_nil assigns(:invalid)
+    end
   end
   
-  test "calling #store method of controller should should assign @invalid" do
-    post :store
-    assert_not_nil assigns(:invalid)
+  test "calling #store method of controller should assign @invalid" do
+    with_image_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = provider.send(:decrypt, challenge).reverse
+      
+      post :store, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_not_nil assigns(:invalid)
+    end
+    
+    with_question_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = '---'
+      
+      post :store, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_not_nil assigns(:invalid)
+    end
   end
   
-  test "calling #persist method of controller should should assign @invalid" do
-    post :persist
-    assert_not_nil assigns(:invalid)
+  test "calling #persist method of controller should assign @invalid" do
+    with_image_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = provider.send(:decrypt, challenge).reverse
+      
+      post :persist, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_not_nil assigns(:invalid)
+    end
+    
+    with_question_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = '---'
+      
+      post :persist, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_not_nil assigns(:invalid)
+    end
   end
   
   test "calling #bingo method of controller should not assign @invalid" do
-    post :bingo
-    assert_nil assigns(:invalid)
+    with_image_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = provider.send(:decrypt, challenge).reverse
+      
+      post :bingo, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_nil assigns(:invalid)
+    end
+    
+    with_question_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = '---'
+      
+      post :bingo, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_nil assigns(:invalid)
+    end
   end
 end
