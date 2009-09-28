@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ValidatesCaptcha::Provider [Validates Captcha]</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Module</span>
+          ValidatesCaptcha::Provider
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../files/lib/validates_captcha/provider/question_rb.html">lib/validates_captcha/provider/question.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/validates_captcha/provider/image_rb.html">lib/validates_captcha/provider/image.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../../files/lib/validates_captcha_rb.html">lib/validates_captcha.rb</a>
+          </li>
+          <li>
+            <a class='show' href='#' onclick='this.parentNode.parentNode.className += " expanded"; this.parentNode.removeChild(this); return false'>show all</a>
+          </li>
+        </ol>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            Here is how you can implement your own captcha challenge provider. Create a
+            class that conforms to the public method definitions of the example below
+            and assign an instance of it to <a
+            href="../ValidatesCaptcha.html#M000003">ValidatesCaptcha#provider=</a>.
+            </p>
+            <p>
+            Example:
+            </p>
+            <pre>require 'action_view/helpers'&#x000A;&#x000A;class ReverseProvider&#x000A;  include ActionView::Helpers # for content_tag, link_to_remote&#x000A;&#x000A;  def initialize&#x000A;    @string_generator = ValidatesCaptcha::StringGenerator::Simple.new&#x000A;  end&#x000A;&#x000A;  def generate_challenge&#x000A;    @string_generator.generate  # creates a random string&#x000A;  end&#x000A;&#x000A;  def solved?(challenge, solution)&#x000A;    challenge.reverse == solution&#x000A;  end&#x000A;&#x000A;  def render_challenge(sanitized_object_name, object, options = {})&#x000A;    options[:id] = &quot;#{sanitized_object_name}_captcha_question&quot;&#x000A;&#x000A;    content_tag :span, &quot;What's the reverse of '#{object.captcha_challenge}'?&quot;, options&#x000A;  end&#x000A;&#x000A;  def render_regenerate_challenge_link(sanitized_object_name, object, options = {}, html_options = {})&#x000A;    text = options.delete(:text) || 'Regenerate'&#x000A;    on_success = &quot;var result = request.responseJSON; &quot; \\&#x000A;                 &quot;$('#{sanitized_object_name}_captcha_question').update(result.question); &quot; \\&#x000A;                 &quot;$('#{sanitized_object_name}_captcha_challenge').value = result.challenge; &quot; \\&#x000A;                 &quot;$('#{sanitized_object_name}_captcha_solution').value = '';&quot;&#x000A;&#x000A;    link_to_remote text, options.reverse_merge(:url =&gt; '/captchas/regenerate', :method =&gt; :get, :success =&gt; success), html_options&#x000A;  end&#x000A;&#x000A;  def call(env)  # this is executed by Rack&#x000A;    if env['PATH_INFO'] == '/captchas/regenerate'&#x000A;      challenge = generate_challenge&#x000A;      json = { :question =&gt; &quot;What's the reverse of '#{challenge}'?&quot;, :challenge =&gt; challenge }.to_json&#x000A;&#x000A;      [200, { 'Content-Type' =&gt; 'application/json' }, [json]]&#x000A;    else&#x000A;      [404, { 'Content-Type' =&gt; 'text/html' }, ['Not Found']]&#x000A;    end&#x000A;  end&#x000A;&#x000A;  private&#x000A;    # Hack: This is needed by +link_to_remote+ called in +render_regenerate_challenge_link+.&#x000A;    def protect_against_forgery?&#x000A;      false&#x000A;    end&#x000A;end&#x000A;&#x000A;ValidatesCaptcha.provider = ReverseProvider.new</pre>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Class <a href="Provider/Image.html" class="link">ValidatesCaptcha::Provider::Image</a><br />
+              Class <a href="Provider/Question.html" class="link">ValidatesCaptcha::Provider::Question</a><br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

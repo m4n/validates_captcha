@@ -50,39 +50,39 @@
             </p>
             <p>
             The number of characters and the alphabet used when generating strings can
-            be customized. See the <a href="Simple.html#M000030">alphabet=</a> and <a
-            href="Simple.html#M000032">length=</a> methods for details.
+            be customized. See the <a href="Simple.html#M000016">alphabet=</a> and <a
+            href="Simple.html#M000018">length=</a> methods for details.
             </p>
             <p>
             You can implement your own string generator by creating a class that
             conforms to the method definitions of the example below and assign an
             instance of it to <a
-            href="../../ValidatesCaptcha.html#M000005">ValidatesCaptcha#string_generator=</a>.
+            href="../Provider/Image.html#M000021">ValidatesCaptcha::Provider::Image#string_generator=</a>.
             </p>
             <p>
             Example for a custom string generator:
             </p>
-            <pre>class DictionaryGenerator&#x000A;  DICTIONARY = ['foo', 'bar', 'baz', ...]&#x000A;&#x000A;  def generate&#x000A;    return DICTIONARY[rand(DICTIONARY.size)]&#x000A;  end&#x000A;end&#x000A;&#x000A;ValidatesCaptcha.string_generator = DictionaryGenerator.new</pre>
+            <pre>class DictionaryGenerator&#x000A;  DICTIONARY = ['foo', 'bar', 'baz', ...]&#x000A;&#x000A;  def generate&#x000A;    return DICTIONARY[rand(DICTIONARY.size)]&#x000A;  end&#x000A;end&#x000A;&#x000A;ValidatesCaptcha::Provider::Image.string_generator = DictionaryGenerator.new&#x000A;ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new</pre>
           </div>
           <div id='method-list'>
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000029">alphabet</a></li>
-              <li><a href="#M000030">alphabet=</a></li>
-              <li><a href="#M000031">length</a></li>
-              <li><a href="#M000032">length=</a></li>
+              <li><a href="#M000015">alphabet</a></li>
+              <li><a href="#M000016">alphabet=</a></li>
+              <li><a href="#M000017">length</a></li>
+              <li><a href="#M000018">length=</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000033">generate</a></li>
+              <li><a href="#M000019">generate</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='public-class method' id='method-M000029'>
-                <a name='M000029'>      </a>
+              <div class='public-class method' id='method-M000015'>
+                <a name='M000015'>      </a>
                 <div class='synopsis'>
                   <span class='name'>alphabet</span>
                   <span class='arguments'>()</span>
@@ -95,14 +95,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000029-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000015-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000029-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 35</span>&#x000A;35:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alphabet</span>&#x000A;36:           <span class="ruby-ivar">@@alphabet</span>&#x000A;37:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000015-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 36</span>&#x000A;36:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alphabet</span>&#x000A;37:           <span class="ruby-ivar">@@alphabet</span>&#x000A;38:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000030'>
-                <a name='M000030'>      </a>
+              <div class='public-class method' id='method-M000016'>
+                <a name='M000016'>      </a>
                 <div class='synopsis'>
                   <span class='name'>alphabet=</span>
                   <span class='arguments'>(alphabet)</span>
@@ -119,14 +119,14 @@
                   <pre>ValidatesCaptcha::StringGenerator::Simple.alphabet = '01'</pre>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000030-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000016-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000030-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 46</span>&#x000A;46:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alphabet=</span>(<span class="ruby-identifier">alphabet</span>)&#x000A;47:           <span class="ruby-identifier">alphabet</span> = <span class="ruby-identifier">alphabet</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\s/</span>, <span class="ruby-value str">''</span>)&#x000A;48:           <span class="ruby-identifier">raise</span>(<span class="ruby-value str">'alphabet cannot be blank'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">alphabet</span>.<span class="ruby-identifier">blank?</span>&#x000A;49:           &#x000A;50:           <span class="ruby-ivar">@@alphabet</span> = <span class="ruby-identifier">alphabet</span>&#x000A;51:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000016-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 47</span>&#x000A;47:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alphabet=</span>(<span class="ruby-identifier">alphabet</span>)&#x000A;48:           <span class="ruby-identifier">alphabet</span> = <span class="ruby-identifier">alphabet</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\s/</span>, <span class="ruby-value str">''</span>)&#x000A;49:           <span class="ruby-identifier">raise</span>(<span class="ruby-value str">'alphabet cannot be blank'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">alphabet</span>.<span class="ruby-identifier">blank?</span>&#x000A;50:           &#x000A;51:           <span class="ruby-ivar">@@alphabet</span> = <span class="ruby-identifier">alphabet</span>&#x000A;52:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000031'>
-                <a name='M000031'>      </a>
+              <div class='public-class method' id='method-M000017'>
+                <a name='M000017'>      </a>
                 <div class='synopsis'>
                   <span class='name'>length</span>
                   <span class='arguments'>()</span>
@@ -137,14 +137,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000031-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000017-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000031-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 54</span>&#x000A;54:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">length</span>&#x000A;55:           <span class="ruby-ivar">@@length</span>&#x000A;56:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000017-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 55</span>&#x000A;55:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">length</span>&#x000A;56:           <span class="ruby-ivar">@@length</span>&#x000A;57:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000032'>
-                <a name='M000032'>      </a>
+              <div class='public-class method' id='method-M000018'>
+                <a name='M000018'>      </a>
                 <div class='synopsis'>
                   <span class='name'>length=</span>
                   <span class='arguments'>(length)</span>
@@ -159,15 +159,15 @@
                   <pre>ValidatesCaptcha::StringGenerator::Simple.length = 8</pre>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000032-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000018-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000032-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 63</span>&#x000A;63:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">length=</span>(<span class="ruby-identifier">length</span>)&#x000A;64:           <span class="ruby-ivar">@@length</span> = <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_i</span>&#x000A;65:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000018-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 64</span>&#x000A;64:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">length=</span>(<span class="ruby-identifier">length</span>)&#x000A;65:           <span class="ruby-ivar">@@length</span> = <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_i</span>&#x000A;66:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000033'>
-                <a name='M000033'>      </a>
+              <div class='public-instance method' id='method-M000019'>
+                <a name='M000019'>      </a>
                 <div class='synopsis'>
                   <span class='name'>generate</span>
                   <span class='arguments'>()</span>
@@ -179,10 +179,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000033-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000019-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000033-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 69</span>&#x000A;69:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate</span>&#x000A;70:         <span class="ruby-identifier">alphabet_chars</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">alphabet</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>)&#x000A;71:         <span class="ruby-identifier">code_chars</span> = []&#x000A;72:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">times</span> { <span class="ruby-identifier">code_chars</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">alphabet_chars</span>[<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">alphabet_chars</span>.<span class="ruby-identifier">size</span>)] }&#x000A;73:         <span class="ruby-identifier">code_chars</span>.<span class="ruby-identifier">join</span>&#x000A;74:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000019-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/string_generator/simple.rb, line 70</span>&#x000A;70:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate</span>&#x000A;71:         <span class="ruby-identifier">alphabet_chars</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">alphabet</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>)&#x000A;72:         <span class="ruby-identifier">code_chars</span> = []&#x000A;73:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">times</span> { <span class="ruby-identifier">code_chars</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">alphabet_chars</span>[<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">alphabet_chars</span>.<span class="ruby-identifier">size</span>)] }&#x000A;74:         <span class="ruby-identifier">code_chars</span>.<span class="ruby-identifier">join</span>&#x000A;75:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

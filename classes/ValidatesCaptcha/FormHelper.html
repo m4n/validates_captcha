@@ -41,16 +41,38 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000019">captcha_field</a></li>
-              <li><a href="#M000018">captcha_image</a></li>
-              <li><a href="#M000020">regenerate_captcha_link</a></li>
+              <li><a href="#M000004">captcha_challenge</a></li>
+              <li><a href="#M000005">captcha_field</a></li>
+              <li><a href="#M000006">regenerate_captcha_challenge_link</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000019'>
-                <a name='M000019'>      </a>
+              <div class='public-instance method' id='method-M000004'>
+                <a name='M000004'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>captcha_challenge</span>
+                  <span class='arguments'>(object_name, options = {})</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns the captcha challenge.
+                  </p>
+                  <p>
+                  Internally calls the <tt>render_challenge</tt> method of <a
+                  href="../ValidatesCaptcha.html#M000002">ValidatesCaptcha#provider</a>.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000004-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000004-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 6</span>&#x000A; 6:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_challenge</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A; 7:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>&#x000A; 8:       &#x000A; 9:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A;10:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;11:       &#x000A;12:       <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">provider</span>.<span class="ruby-identifier">render_challenge</span> <span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>&#x000A;13:     <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000005'>
+                <a name='M000005'>      </a>
                 <div class='synopsis'>
                   <span class='name'>captcha_field</span>
                   <span class='arguments'>(object_name, options = {})</span>
@@ -58,7 +80,7 @@
                 <div class='description'>
                   <p>
                   Returns an input tag of the &#8220;text&#8221; type tailored for entering
-                  the captcha code.
+                  the captcha solution.
                   </p>
                   <p>
                   Internally calls Rails&#8217; text_field helper method, passing the
@@ -66,62 +88,34 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000019-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000005-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000019-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 22</span>&#x000A;22:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A;23:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:id</span>)&#x000A;24:       &#x000A;25:       <span class="ruby-identifier">hidden_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:encrypted_captcha</span>, <span class="ruby-identifier">options</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">text_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha</span>, <span class="ruby-identifier">options</span>)&#x000A;26:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000005-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 19</span>&#x000A;19:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A;20:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:id</span>)&#x000A;21:       &#x000A;22:       <span class="ruby-identifier">hidden_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha_challenge</span>, <span class="ruby-identifier">options</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">text_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha_solution</span>, <span class="ruby-identifier">options</span>)&#x000A;23:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000018'>
-                <a name='M000018'>      </a>
+              <div class='public-instance method' id='method-M000006'>
+                <a name='M000006'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>captcha_image</span>
-                  <span class='arguments'>(object_name, options = {})</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns an img tag with the src attribute pointing to the captcha image
-                  url.
-                  </p>
-                  <p>
-                  Internally calls Rails&#8217; image_tag helper method, passing the
-                  <tt>options</tt> argument.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000018-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000018-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 7</span>&#x000A; 7:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_image</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A; 8:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A; 9:       <span class="ruby-identifier">src</span> = <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">captcha_image_path</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">encrypted_captcha</span>)&#x000A;10:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;11:       &#x000A;12:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:alt</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'CAPTCHA'</span>&#x000A;13:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:id</span>] = <span class="ruby-node">&quot;#{sanitized_object_name}_captcha_image&quot;</span>&#x000A;14:       &#x000A;15:       <span class="ruby-identifier">image_tag</span> <span class="ruby-identifier">src</span>, <span class="ruby-identifier">options</span>&#x000A;16:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-instance method' id='method-M000020'>
-                <a name='M000020'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>regenerate_captcha_link</span>
+                  <span class='name'>regenerate_captcha_challenge_link</span>
                   <span class='arguments'>(object_name, options = {}, html_options = {})</span>
                 </div>
                 <div class='description'>
                   <p>
-                  Returns an anchor tag that makes an AJAX request to fetch a new captcha
-                  code and updates the captcha image after the request is complete.
+                  By default, returns an anchor tag that makes an AJAX request to fetch a new
+                  captcha challenge and updates the current challenge after the request is
+                  complete.
                   </p>
                   <p>
-                  Internally calls Rails&#8217; link_to_remote helper method, passing the
-                  <tt>options</tt> and <tt>html_options</tt> arguments. So it relies on the
-                  Prototype javascript framework to be available on the web page.
-                  </p>
-                  <p>
-                  The anchor text defaults to &#8216;Regenerate Captcha&#8217;. You can set
-                  this to a custom value providing a <tt>:text</tt> key in the
-                  <tt>options</tt> hash.
+                  Internally calls <tt>render_regenerate_challenge_link</tt> method of <a
+                  href="../ValidatesCaptcha.html#M000002">ValidatesCaptcha#provider</a>.
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000020-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000006-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000020-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 37</span>&#x000A;37:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regenerate_captcha_link</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})&#x000A;38:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>&#x000A;39:       &#x000A;40:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A;41:       <span class="ruby-identifier">text</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:text</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">'Regenerate Captcha'</span>      &#x000A;42:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;43:       &#x000A;44:       <span class="ruby-identifier">url</span> = <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">regenerate_captcha_path</span>&#x000A;45:       <span class="ruby-identifier">success</span> = <span class="ruby-node">&quot;var result = request.responseJSON; $('#{sanitized_object_name}_captcha_image').src = result.captcha_image_path; $('#{sanitized_object_name}_encrypted_captcha').value = result.encrypted_captcha_code;&quot;</span>&#x000A;46:       &#x000A;47:       <span class="ruby-identifier">link_to_remote</span> <span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge</span>(<span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">url</span>, <span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:get</span>, <span class="ruby-identifier">:success</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">success</span>), <span class="ruby-identifier">html_options</span>&#x000A;48:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000006-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 29</span>&#x000A;29:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regenerate_captcha_challenge_link</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})&#x000A;30:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>&#x000A;31:       &#x000A;32:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A;33:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;34:       &#x000A;35:       <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">provider</span>.<span class="ruby-identifier">render_regenerate_challenge_link</span> <span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>&#x000A;36:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

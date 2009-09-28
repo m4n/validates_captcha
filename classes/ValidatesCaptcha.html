@@ -49,7 +49,10 @@
             <a href="../files/lib/validates_captcha/image_generator/simple_rb.html">lib/validates_captcha/image_generator/simple.rb</a>
           </li>
           <li class='other'>
-            <a href="../files/lib/validates_captcha/middleware/simple_rb.html">lib/validates_captcha/middleware/simple.rb</a>
+            <a href="../files/lib/validates_captcha/provider/question_rb.html">lib/validates_captcha/provider/question.rb</a>
+          </li>
+          <li class='other'>
+            <a href="../files/lib/validates_captcha/provider/image_rb.html">lib/validates_captcha/provider/image.rb</a>
           </li>
           <li class='other'>
             <a href="../files/lib/validates_captcha/form_builder_rb.html">lib/validates_captcha/form_builder.rb</a>
@@ -66,40 +69,19 @@
         <div id='text'>
           <div id='description'>
             <p>
-            This module contains the getters and setters for the backend classes:
-            image/string generator, reversible encrypter, and Rack middleware. This
-            allows you to replace them with your custom implementations. For more
+            This module contains the getter and setter for the captcha provider. This
+            allows you to replace it with your custom implementation. For more
             information on how to bring Validates Captcha to use your own
             implementation instead of the default one, consult the documentation for
-            the specific default class.
-            </p>
-            <p>
-            This module also contains convenience wrapper methods for all the methods
-            provided by the configured backend classes. These wrapper methods form the
-            API that is visible to the outside world and that all backend classes use
-            for internal communication.
+            the default provider.
             </p>
           </div>
           <div id='method-list'>
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000012">captcha_image_file_extension</a></li>
-              <li><a href="#M000013">captcha_image_mime_type</a></li>
-              <li><a href="#M000016">captcha_image_path</a></li>
-              <li><a href="#M000015">decrypt_captcha_code</a></li>
-              <li><a href="#M000014">encrypt_captcha_code</a></li>
-              <li><a href="#M000010">generate_captcha_code</a></li>
-              <li><a href="#M000011">generate_captcha_image</a></li>
-              <li><a href="#M000002">image_generator</a></li>
-              <li><a href="#M000003">image_generator=</a></li>
-              <li><a href="#M000008">middleware</a></li>
-              <li><a href="#M000009">middleware=</a></li>
-              <li><a href="#M000017">regenerate_captcha_path</a></li>
-              <li><a href="#M000006">reversible_encrypter</a></li>
-              <li><a href="#M000007">reversible_encrypter=</a></li>
-              <li><a href="#M000004">string_generator</a></li>
-              <li><a href="#M000005">string_generator=</a></li>
+              <li><a href="#M000002">provider</a></li>
+              <li><a href="#M000003">provider=</a></li>
               <li><a href="#M000001">version</a></li>
             </ol>
           </div>
@@ -109,158 +91,24 @@
               Module <a href="ValidatesCaptcha/ControllerValidation.html" class="link">ValidatesCaptcha::ControllerValidation</a><br />
               Module <a href="ValidatesCaptcha/FormHelper.html" class="link">ValidatesCaptcha::FormHelper</a><br />
               Module <a href="ValidatesCaptcha/ImageGenerator.html" class="link">ValidatesCaptcha::ImageGenerator</a><br />
-              Module <a href="ValidatesCaptcha/Middleware.html" class="link">ValidatesCaptcha::Middleware</a><br />
               Module <a href="ValidatesCaptcha/ModelValidation.html" class="link">ValidatesCaptcha::ModelValidation</a><br />
+              Module <a href="ValidatesCaptcha/Provider.html" class="link">ValidatesCaptcha::Provider</a><br />
               Module <a href="ValidatesCaptcha/ReversibleEncrypter.html" class="link">ValidatesCaptcha::ReversibleEncrypter</a><br />
               Module <a href="ValidatesCaptcha/StringGenerator.html" class="link">ValidatesCaptcha::StringGenerator</a><br />
             </div>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='public-class method' id='method-M000012'>
-                <a name='M000012'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>captcha_image_file_extension</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the image file extension of the captcha images. This method
-                  internally calls <tt>image_generator.image_file_extension</tt>.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000012-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000012-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 134</span>&#x000A;134:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_image_file_extension</span>&#x000A;135:       <span class="ruby-identifier">image_generator</span>.<span class="ruby-identifier">image_file_extension</span>&#x000A;136:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000013'>
-                <a name='M000013'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>captcha_image_mime_type</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the image mime type of the captcha images. This method internally
-                  calls <tt>image_generator.image_mime_type</tt>.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000013-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000013-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 140</span>&#x000A;140:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_image_mime_type</span>&#x000A;141:       <span class="ruby-identifier">image_generator</span>.<span class="ruby-identifier">image_mime_type</span>&#x000A;142:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000016'>
-                <a name='M000016'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>captcha_image_path</span>
-                  <span class='arguments'>(encrypted_code)</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the captcha image path for a given encrypted code. This method
-                  internally calls <tt>middleware.image_path</tt>.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000016-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000016-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 158</span>&#x000A;158:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_image_path</span>(<span class="ruby-identifier">encrypted_code</span>)&#x000A;159:       <span class="ruby-identifier">middleware</span>.<span class="ruby-identifier">image_path</span>(<span class="ruby-identifier">encrypted_code</span>)&#x000A;160:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000015'>
-                <a name='M000015'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>decrypt_captcha_code</span>
-                  <span class='arguments'>(encrypted_code)</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the decryption of an encrypted captcha code. This method internally
-                  calls <tt>reversible_encrypter.decrypt</tt>.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000015-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000015-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 152</span>&#x000A;152:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrypt_captcha_code</span>(<span class="ruby-identifier">encrypted_code</span>)&#x000A;153:       <span class="ruby-identifier">reversible_encrypter</span>.<span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">encrypted_code</span>)&#x000A;154:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000014'>
-                <a name='M000014'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>encrypt_captcha_code</span>
-                  <span class='arguments'>(code)</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the encryption of a cleartext captcha code. This method internally
-                  calls <tt>reversible_encrypter.encrypt</tt>.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000014-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000014-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 146</span>&#x000A;146:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encrypt_captcha_code</span>(<span class="ruby-identifier">code</span>)&#x000A;147:       <span class="ruby-identifier">reversible_encrypter</span>.<span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">code</span>)&#x000A;148:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000010'>
-                <a name='M000010'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>generate_captcha_code</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Randomly generates a string which can be used as the code displayed on
-                  captcha images. This method internally calls
-                  <tt>string_generator.generate</tt>.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000010-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000010-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 122</span>&#x000A;122:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_captcha_code</span>&#x000A;123:       <span class="ruby-identifier">string_generator</span>.<span class="ruby-identifier">generate</span>&#x000A;124:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000011'>
-                <a name='M000011'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>generate_captcha_image</span>
-                  <span class='arguments'>(code)</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the image data of the generated captcha image. This method
-                  internally calls <tt>image_generator.generate</tt>.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000011-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000011-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 128</span>&#x000A;128:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_captcha_image</span>(<span class="ruby-identifier">code</span>)&#x000A;129:       <span class="ruby-identifier">image_generator</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">code</span>)&#x000A;130:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
               <div class='public-class method' id='method-M000002'>
                 <a name='M000002'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>image_generator</span>
+                  <span class='name'>provider</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='description'>
                   <p>
-                  Returns the current captcha image generator. Defaults to an instance of the
-                  <a
-                  href="ValidatesCaptcha/ImageGenerator/Simple.html">ValidatesCaptcha::ImageGenerator::Simple</a>
+                  Returns the current captcha challenge provider. Defaults to an instance of
+                  the <a
+                  href="ValidatesCaptcha/Provider/Question.html">ValidatesCaptcha::Provider::Question</a>
                   class.
                   </p>
                 </div>
@@ -268,163 +116,25 @@
                   <a class='source-toggle' href='#' onclick="toggleCode('M000002-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000002-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 73</span>&#x000A;73:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_generator</span>&#x000A;74:       <span class="ruby-ivar">@@image_generator</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ImageGenerator</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;75:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000002-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 65</span>&#x000A;65:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">provider</span>&#x000A;66:       <span class="ruby-ivar">@@provider</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Provider</span><span class="ruby-operator">::</span><span class="ruby-constant">Question</span>.<span class="ruby-identifier">new</span>&#x000A;67:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='public-class method' id='method-M000003'>
                 <a name='M000003'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>image_generator=</span>
-                  <span class='arguments'>(generator)</span>
+                  <span class='name'>provider=</span>
+                  <span class='arguments'>(provider)</span>
                 </div>
                 <div class='description'>
                   <p>
-                  Sets the current captcha image generator. Used to set a custom image
-                  generator.
+                  Sets the current captcha challenge provider. Used to set a custom provider.
                   </p>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000003-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000003-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 79</span>&#x000A;79:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_generator=</span>(<span class="ruby-identifier">generator</span>)&#x000A;80:       <span class="ruby-ivar">@@image_generator</span> = <span class="ruby-identifier">generator</span>&#x000A;81:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000008'>
-                <a name='M000008'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>middleware</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the current captcha middleware. Defaults to the <a
-                  href="ValidatesCaptcha/Middleware/Simple.html">ValidatesCaptcha::Middleware::Simple</a>
-                  class.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000008-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000008-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 109</span>&#x000A;109:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">middleware</span>&#x000A;110:       <span class="ruby-ivar">@@middleware</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;111:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000009'>
-                <a name='M000009'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>middleware=</span>
-                  <span class='arguments'>(middleware)</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Sets the current captcha middleware. Used to set a custom middleware.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000009-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000009-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 115</span>&#x000A;115:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">middleware=</span>(<span class="ruby-identifier">middleware</span>)&#x000A;116:       <span class="ruby-ivar">@@middleware</span> = <span class="ruby-identifier">middleware</span>&#x000A;117:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000017'>
-                <a name='M000017'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>regenerate_captcha_path</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the path that is used when requesting the regeneration of a captcha
-                  image. This method internally calls <tt>middleware.regenerate_path</tt>.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000017-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000017-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 165</span>&#x000A;165:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regenerate_captcha_path</span>&#x000A;166:       <span class="ruby-identifier">middleware</span>.<span class="ruby-identifier">regenerate_path</span>&#x000A;167:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000006'>
-                <a name='M000006'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>reversible_encrypter</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the current captcha reversible encrypter. Defaults to an instance
-                  of the <a
-                  href="ValidatesCaptcha/ReversibleEncrypter/Simple.html">ValidatesCaptcha::ReversibleEncrypter::Simple</a>
-                  class.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000006-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000006-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 97</span>&#x000A;97:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reversible_encrypter</span>&#x000A;98:       <span class="ruby-ivar">@@reversible_encrypter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ReversibleEncrypter</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;99:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000007'>
-                <a name='M000007'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>reversible_encrypter=</span>
-                  <span class='arguments'>(encrypter)</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Sets the current captcha reversible encrypter. Used to set a custom
-                  reversible encrypter.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000007-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000007-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 103</span>&#x000A;103:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reversible_encrypter=</span>(<span class="ruby-identifier">encrypter</span>)&#x000A;104:       <span class="ruby-ivar">@@reversible_encrypter</span> = <span class="ruby-identifier">encrypter</span>&#x000A;105:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000004'>
-                <a name='M000004'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>string_generator</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Returns the current captcha string generator. Defaults to an instance of
-                  the <a
-                  href="ValidatesCaptcha/StringGenerator/Simple.html">ValidatesCaptcha::StringGenerator::Simple</a>
-                  class.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000004-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000004-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 85</span>&#x000A;85:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_generator</span>&#x000A;86:       <span class="ruby-ivar">@@string_generator</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">StringGenerator</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;87:     <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-class method' id='method-M000005'>
-                <a name='M000005'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>string_generator=</span>
-                  <span class='arguments'>(generator)</span>
-                </div>
-                <div class='description'>
-                  <p>
-                  Sets the current captcha string generator. Used to set a custom string
-                  generator.
-                  </p>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000005-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000005-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 91</span>&#x000A;91:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_generator=</span>(<span class="ruby-identifier">generator</span>)&#x000A;92:       <span class="ruby-ivar">@@string_generator</span> = <span class="ruby-identifier">generator</span>&#x000A;93:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000003-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 70</span>&#x000A;70:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">provider=</span>(<span class="ruby-identifier">provider</span>)&#x000A;71:       <span class="ruby-ivar">@@provider</span> = <span class="ruby-identifier">provider</span>&#x000A;72:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='public-class method' id='method-M000001'>
@@ -435,14 +145,14 @@
                 </div>
                 <div class='description'>
                   <p>
-                  Returns ValidatesCaptcha&#8217;s current version number.
+                  Returns Validates Captcha&#8217;s current version number.
                   </p>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000001-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000001-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 67</span>&#x000A;67:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">version</span>&#x000A;68:       <span class="ruby-constant">ValidatesCaptcha</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span><span class="ruby-operator">::</span><span class="ruby-constant">STRING</span>&#x000A;69:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000001-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha.rb, line 59</span>&#x000A;59:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">version</span>&#x000A;60:       <span class="ruby-constant">ValidatesCaptcha</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span><span class="ruby-operator">::</span><span class="ruby-constant">STRING</span>&#x000A;61:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
