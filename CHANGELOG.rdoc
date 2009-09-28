@@ -1,4 +1,4 @@
-== Edge
+== 0.9.3 (September 29, 2009)
 
 * Change API, include new Question provider, make it the default one
 
