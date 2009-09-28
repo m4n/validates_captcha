@@ -219,13 +219,13 @@ You can install Validates Captcha as a Rails plugin with the following command.
   
 Or you can install it as a Gem with
 
-  % [sudo] gem install m4n-validates_captcha --source http://gems.github.com
+  % [sudo] gem install validates_captcha
 
 and then configure it in your +environment.rb+ file as shown below.
 
   Rails::Initializer.run do |config|
     # ...
-    config.gem 'm4n-validates_captcha', :lib => 'validates_captcha'
+    config.gem 'validates_captcha'
     # ...
   end
 
