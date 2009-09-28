@@ -194,6 +194,27 @@ ValidatesCaptcha::ImageGenerator::Simple on how to create your own.
 
 
 
+== Installation
+  
+You can install Validates Captcha as a Gem with
+
+  % [sudo] gem install validates_captcha
+
+and then configure it in your +environment.rb+ file as shown below.
+
+  Rails::Initializer.run do |config|
+    # ...
+    config.gem 'validates_captcha'
+    # ...
+  end
+
+Or you can install it as a Rails plugin (discouraged) with the 
+following command.
+
+  % ./script/plugin install git://github.com/m4n/validates_captcha.git
+
+
+
 == Download
 
 The latest version of Validates Captcha can be found at 
@@ -211,23 +232,17 @@ following command.
 
 
 
-== Installation
+== Hacking
 
-You can install Validates Captcha as a Rails plugin with the following command.
+Validates Captcha is {hosted on Github}[http://github.com/m4n/validates_captcha]. 
+Pull requests are welcome.
 
-  % ./script/plugin install git://github.com/m4n/validates_captcha.git
-  
-Or you can install it as a Gem with
 
-  % [sudo] gem install validates_captcha
 
-and then configure it in your +environment.rb+ file as shown below.
+== Bugs
 
-  Rails::Initializer.run do |config|
-    # ...
-    config.gem 'validates_captcha'
-    # ...
-  end
+Please report bugs on the {Github issue tracker}[http://github.com/m4n/validates_captcha/issues]
+for this project.
 
 
 
