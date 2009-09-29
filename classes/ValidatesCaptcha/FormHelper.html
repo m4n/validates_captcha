@@ -41,16 +41,16 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000004">captcha_challenge</a></li>
-              <li><a href="#M000005">captcha_field</a></li>
-              <li><a href="#M000006">regenerate_captcha_challenge_link</a></li>
+              <li><a href="#M000035">captcha_challenge</a></li>
+              <li><a href="#M000036">captcha_field</a></li>
+              <li><a href="#M000037">regenerate_captcha_challenge_link</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000004'>
-                <a name='M000004'>      </a>
+              <div class='public-instance method' id='method-M000035'>
+                <a name='M000035'>      </a>
                 <div class='synopsis'>
                   <span class='name'>captcha_challenge</span>
                   <span class='arguments'>(object_name, options = {})</span>
@@ -65,14 +65,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000004-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000035-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000004-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 6</span>&#x000A; 6:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_challenge</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A; 7:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>&#x000A; 8:       &#x000A; 9:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A;10:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;11:       &#x000A;12:       <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">provider</span>.<span class="ruby-identifier">render_challenge</span> <span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>&#x000A;13:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000035-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 6</span>&#x000A; 6:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_challenge</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A; 7:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>&#x000A; 8:       &#x000A; 9:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A;10:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;11:       &#x000A;12:       <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">provider</span>.<span class="ruby-identifier">render_challenge</span> <span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>&#x000A;13:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000005'>
-                <a name='M000005'>      </a>
+              <div class='public-instance method' id='method-M000036'>
+                <a name='M000036'>      </a>
                 <div class='synopsis'>
                   <span class='name'>captcha_field</span>
                   <span class='arguments'>(object_name, options = {})</span>
@@ -88,14 +88,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000005-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000036-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000005-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 19</span>&#x000A;19:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A;20:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:id</span>)&#x000A;21:       &#x000A;22:       <span class="ruby-identifier">hidden_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha_challenge</span>, <span class="ruby-identifier">options</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">text_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha_solution</span>, <span class="ruby-identifier">options</span>)&#x000A;23:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000036-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 19</span>&#x000A;19:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A;20:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:id</span>)&#x000A;21:       &#x000A;22:       <span class="ruby-identifier">hidden_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha_challenge</span>, <span class="ruby-identifier">options</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">text_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha_solution</span>, <span class="ruby-identifier">options</span>)&#x000A;23:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000006'>
-                <a name='M000006'>      </a>
+              <div class='public-instance method' id='method-M000037'>
+                <a name='M000037'>      </a>
                 <div class='synopsis'>
                   <span class='name'>regenerate_captcha_challenge_link</span>
                   <span class='arguments'>(object_name, options = {}, html_options = {})</span>
@@ -112,10 +112,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000006-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000037-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000006-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 29</span>&#x000A;29:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regenerate_captcha_challenge_link</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})&#x000A;30:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>&#x000A;31:       &#x000A;32:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A;33:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;34:       &#x000A;35:       <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">provider</span>.<span class="ruby-identifier">render_regenerate_challenge_link</span> <span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>&#x000A;36:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000037-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 29</span>&#x000A;29:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regenerate_captcha_challenge_link</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})&#x000A;30:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>&#x000A;31:       &#x000A;32:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A;33:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;34:       &#x000A;35:       <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">provider</span>.<span class="ruby-identifier">render_regenerate_challenge_link</span> <span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>&#x000A;36:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
@@ -127,5 +127,14 @@
     <div id='footer'>
       <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
     </div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10871272-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
   </body>
 </html>
