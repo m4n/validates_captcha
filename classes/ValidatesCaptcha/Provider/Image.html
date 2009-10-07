@@ -67,20 +67,20 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000024">image_generator</a></li>
-              <li><a href="#M000025">image_generator=</a></li>
-              <li><a href="#M000022">reversible_encrypter</a></li>
-              <li><a href="#M000023">reversible_encrypter=</a></li>
-              <li><a href="#M000020">string_generator</a></li>
-              <li><a href="#M000021">string_generator=</a></li>
+              <li><a href="#M000043">image_generator</a></li>
+              <li><a href="#M000044">image_generator=</a></li>
+              <li><a href="#M000041">reversible_encrypter</a></li>
+              <li><a href="#M000042">reversible_encrypter=</a></li>
+              <li><a href="#M000039">string_generator</a></li>
+              <li><a href="#M000040">string_generator=</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000026">call</a></li>
-              <li><a href="#M000027">generate_challenge</a></li>
-              <li><a href="#M000029">render_challenge</a></li>
-              <li><a href="#M000030">render_regenerate_challenge_link</a></li>
-              <li><a href="#M000028">solved?</a></li>
+              <li><a href="#M000045">call</a></li>
+              <li><a href="#M000046">generate_challenge</a></li>
+              <li><a href="#M000048">render_challenge</a></li>
+              <li><a href="#M000049">render_regenerate_challenge_link</a></li>
+              <li><a href="#M000047">solved?</a></li>
             </ol>
           </div>
           <div id='context'>
@@ -92,22 +92,10 @@
             </div>
           </div>
           <div id='section'>
-            <div id='constants-list'>
-              <h2>Constants</h2>
-              <div class='name-list'>
-                <table summary='Constants'>
-                  <tr class='top-aligned-row context-row'>
-                    <td class='context-item-name'>KEY</td>
-                    <td>=</td>
-                    <td class='context-item-value'>::ActiveSupport::SecureRandom.hex(32).freeze</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='public-class method' id='method-M000024'>
-                <a name='M000024'>      </a>
+              <div class='public-class method' id='method-M000043'>
+                <a name='M000043'>      </a>
                 <div class='synopsis'>
                   <span class='name'>image_generator</span>
                   <span class='arguments'>()</span>
@@ -121,14 +109,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000024-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000043-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000024-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 116</span>&#x000A;116:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_generator</span>&#x000A;117:           <span class="ruby-ivar">@@image_generator</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ValidatesCaptcha</span><span class="ruby-operator">::</span><span class="ruby-constant">ImageGenerator</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;118:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000043-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 112</span>&#x000A;112:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_generator</span>&#x000A;113:           <span class="ruby-ivar">@@image_generator</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ValidatesCaptcha</span><span class="ruby-operator">::</span><span class="ruby-constant">ImageGenerator</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;114:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000025'>
-                <a name='M000025'>      </a>
+              <div class='public-class method' id='method-M000044'>
+                <a name='M000044'>      </a>
                 <div class='synopsis'>
                   <span class='name'>image_generator=</span>
                   <span class='arguments'>(generator)</span>
@@ -140,14 +128,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000025-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000044-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000025-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 122</span>&#x000A;122:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_generator=</span>(<span class="ruby-identifier">generator</span>)&#x000A;123:           <span class="ruby-ivar">@@image_generator</span> = <span class="ruby-identifier">generator</span>&#x000A;124:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000044-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 118</span>&#x000A;118:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image_generator=</span>(<span class="ruby-identifier">generator</span>)&#x000A;119:           <span class="ruby-ivar">@@image_generator</span> = <span class="ruby-identifier">generator</span>&#x000A;120:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000022'>
-                <a name='M000022'>      </a>
+              <div class='public-class method' id='method-M000041'>
+                <a name='M000041'>      </a>
                 <div class='synopsis'>
                   <span class='name'>reversible_encrypter</span>
                   <span class='arguments'>()</span>
@@ -161,14 +149,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000022-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000041-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000022-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 104</span>&#x000A;104:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reversible_encrypter</span>&#x000A;105:           <span class="ruby-ivar">@@reversible_encrypter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ValidatesCaptcha</span><span class="ruby-operator">::</span><span class="ruby-constant">ReversibleEncrypter</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;106:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000041-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 100</span>&#x000A;100:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reversible_encrypter</span>&#x000A;101:           <span class="ruby-ivar">@@reversible_encrypter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ValidatesCaptcha</span><span class="ruby-operator">::</span><span class="ruby-constant">ReversibleEncrypter</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;102:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000023'>
-                <a name='M000023'>      </a>
+              <div class='public-class method' id='method-M000042'>
+                <a name='M000042'>      </a>
                 <div class='synopsis'>
                   <span class='name'>reversible_encrypter=</span>
                   <span class='arguments'>(encrypter)</span>
@@ -180,14 +168,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000023-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000042-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000023-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 110</span>&#x000A;110:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reversible_encrypter=</span>(<span class="ruby-identifier">encrypter</span>)&#x000A;111:           <span class="ruby-ivar">@@reversible_encrypter</span> = <span class="ruby-identifier">encrypter</span>&#x000A;112:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000042-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 106</span>&#x000A;106:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reversible_encrypter=</span>(<span class="ruby-identifier">encrypter</span>)&#x000A;107:           <span class="ruby-ivar">@@reversible_encrypter</span> = <span class="ruby-identifier">encrypter</span>&#x000A;108:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000020'>
-                <a name='M000020'>      </a>
+              <div class='public-class method' id='method-M000039'>
+                <a name='M000039'>      </a>
                 <div class='synopsis'>
                   <span class='name'>string_generator</span>
                   <span class='arguments'>()</span>
@@ -201,14 +189,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000020-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000039-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000020-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 92</span>&#x000A;92:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_generator</span>&#x000A;93:           <span class="ruby-ivar">@@string_generator</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ValidatesCaptcha</span><span class="ruby-operator">::</span><span class="ruby-constant">StringGenerator</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;94:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000039-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 88</span>&#x000A;88:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_generator</span>&#x000A;89:           <span class="ruby-ivar">@@string_generator</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ValidatesCaptcha</span><span class="ruby-operator">::</span><span class="ruby-constant">StringGenerator</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>&#x000A;90:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000021'>
-                <a name='M000021'>      </a>
+              <div class='public-class method' id='method-M000040'>
+                <a name='M000040'>      </a>
                 <div class='synopsis'>
                   <span class='name'>string_generator=</span>
                   <span class='arguments'>(generator)</span>
@@ -220,15 +208,15 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000021-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000040-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000021-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 98</span>&#x000A; 98:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_generator=</span>(<span class="ruby-identifier">generator</span>)&#x000A; 99:           <span class="ruby-ivar">@@string_generator</span> = <span class="ruby-identifier">generator</span>&#x000A;100:         <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000040-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 94</span>&#x000A;94:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_generator=</span>(<span class="ruby-identifier">generator</span>)&#x000A;95:           <span class="ruby-ivar">@@string_generator</span> = <span class="ruby-identifier">generator</span>&#x000A;96:         <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000026'>
-                <a name='M000026'>      </a>
+              <div class='public-instance method' id='method-M000045'>
+                <a name='M000045'>      </a>
                 <div class='synopsis'>
                   <span class='name'>call</span>
                   <span class='arguments'>(env)</span>
@@ -247,14 +235,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000026-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000045-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000026-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 134</span>&#x000A;134:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)&#x000A;135:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">env</span>[<span class="ruby-value str">'PATH_INFO'</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\/captchas\/([^\.]+)/</span>&#x000A;136:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$1</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'regenerate'</span>&#x000A;137:             <span class="ruby-identifier">captcha_challenge</span> = <span class="ruby-identifier">generate_challenge</span>&#x000A;138:             <span class="ruby-identifier">json</span> = { <span class="ruby-identifier">:captcha_challenge</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">captcha_challenge</span>, <span class="ruby-identifier">:captcha_image_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">image_path</span>(<span class="ruby-identifier">captcha_challenge</span>) }.<span class="ruby-identifier">to_json</span>&#x000A;139:             &#x000A;140:             [<span class="ruby-value">200</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'application/json'</span> }, [<span class="ruby-identifier">json</span>]]&#x000A;141:           <span class="ruby-keyword kw">else</span>&#x000A;142:             <span class="ruby-identifier">decrypted_code</span> = <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">$1</span>)&#x000A;143:           &#x000A;144:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">decrypted_code</span>.<span class="ruby-identifier">nil?</span>&#x000A;145:               [<span class="ruby-value">422</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/html'</span> }, [<span class="ruby-value str">'Unprocessable Entity'</span>]]&#x000A;146:             <span class="ruby-keyword kw">else</span>&#x000A;147:               <span class="ruby-identifier">image_data</span> = <span class="ruby-identifier">generate_image</span>(<span class="ruby-identifier">decrypted_code</span>)&#x000A;148:               &#x000A;149:               <span class="ruby-identifier">response_headers</span> = {&#x000A;150:                 <span class="ruby-value str">'Content-Length'</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">image_data</span>.<span class="ruby-identifier">bytesize</span>.<span class="ruby-identifier">to_s</span>,&#x000A;151:                 <span class="ruby-value str">'Content-Type'</span>              =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">image_mime_type</span>,&#x000A;152:                 <span class="ruby-value str">'Content-Disposition'</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'inline'</span>,&#x000A;153:                 <span class="ruby-value str">'Content-Transfer-Encoding'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'binary'</span>,&#x000A;154:                 <span class="ruby-value str">'Cache-Control'</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'private'</span>&#x000A;155:               }&#x000A;156:               &#x000A;157:               [<span class="ruby-value">200</span>, <span class="ruby-identifier">response_headers</span>, [<span class="ruby-identifier">image_data</span>]]&#x000A;158:             <span class="ruby-keyword kw">end</span>&#x000A;159:           <span class="ruby-keyword kw">end</span>&#x000A;160:         <span class="ruby-keyword kw">else</span>&#x000A;161:           [<span class="ruby-value">404</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/html'</span> }, [<span class="ruby-value str">'Not Found'</span>]]&#x000A;162:         <span class="ruby-keyword kw">end</span>&#x000A;163:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000045-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 130</span>&#x000A;130:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)&#x000A;131:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">env</span>[<span class="ruby-value str">'PATH_INFO'</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\/captchas\/([^\.]+)/</span>&#x000A;132:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$1</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'regenerate'</span>&#x000A;133:             <span class="ruby-identifier">captcha_challenge</span> = <span class="ruby-identifier">generate_challenge</span>&#x000A;134:             <span class="ruby-identifier">json</span> = { <span class="ruby-identifier">:captcha_challenge</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">captcha_challenge</span>, <span class="ruby-identifier">:captcha_image_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">image_path</span>(<span class="ruby-identifier">captcha_challenge</span>) }.<span class="ruby-identifier">to_json</span>&#x000A;135:             &#x000A;136:             [<span class="ruby-value">200</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'application/json'</span> }, [<span class="ruby-identifier">json</span>]]&#x000A;137:           <span class="ruby-keyword kw">else</span>&#x000A;138:             <span class="ruby-identifier">decrypted_code</span> = <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">$1</span>)&#x000A;139:           &#x000A;140:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">decrypted_code</span>.<span class="ruby-identifier">nil?</span>&#x000A;141:               [<span class="ruby-value">422</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/html'</span> }, [<span class="ruby-value str">'Unprocessable Entity'</span>]]&#x000A;142:             <span class="ruby-keyword kw">else</span>&#x000A;143:               <span class="ruby-identifier">image_data</span> = <span class="ruby-identifier">generate_image</span>(<span class="ruby-identifier">decrypted_code</span>)&#x000A;144:               &#x000A;145:               <span class="ruby-identifier">response_headers</span> = {&#x000A;146:                 <span class="ruby-value str">'Content-Length'</span>            =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">image_data</span>.<span class="ruby-identifier">bytesize</span>.<span class="ruby-identifier">to_s</span>,&#x000A;147:                 <span class="ruby-value str">'Content-Type'</span>              =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">image_mime_type</span>,&#x000A;148:                 <span class="ruby-value str">'Content-Disposition'</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'inline'</span>,&#x000A;149:                 <span class="ruby-value str">'Content-Transfer-Encoding'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'binary'</span>,&#x000A;150:                 <span class="ruby-value str">'Cache-Control'</span>             =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'private'</span>&#x000A;151:               }&#x000A;152:               &#x000A;153:               [<span class="ruby-value">200</span>, <span class="ruby-identifier">response_headers</span>, [<span class="ruby-identifier">image_data</span>]]&#x000A;154:             <span class="ruby-keyword kw">end</span>&#x000A;155:           <span class="ruby-keyword kw">end</span>&#x000A;156:         <span class="ruby-keyword kw">else</span>&#x000A;157:           [<span class="ruby-value">404</span>, { <span class="ruby-value str">'Content-Type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/html'</span> }, [<span class="ruby-value str">'Not Found'</span>]]&#x000A;158:         <span class="ruby-keyword kw">end</span>&#x000A;159:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000027'>
-                <a name='M000027'>      </a>
+              <div class='public-instance method' id='method-M000046'>
+                <a name='M000046'>      </a>
                 <div class='synopsis'>
                   <span class='name'>generate_challenge</span>
                   <span class='arguments'>()</span>
@@ -265,14 +253,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000027-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000046-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000027-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 166</span>&#x000A;166:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_challenge</span>&#x000A;167:         <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">generate_code</span>)&#x000A;168:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000046-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 162</span>&#x000A;162:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_challenge</span>&#x000A;163:         <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">generate_code</span>)&#x000A;164:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000029'>
-                <a name='M000029'>      </a>
+              <div class='public-instance method' id='method-M000048'>
+                <a name='M000048'>      </a>
                 <div class='synopsis'>
                   <span class='name'>render_challenge</span>
                   <span class='arguments'>(sanitized_object_name, object, options = {})</span>
@@ -287,14 +275,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000029-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000048-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000029-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 179</span>&#x000A;179:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_challenge</span>(<span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span> = {})&#x000A;180:         <span class="ruby-identifier">src</span> = <span class="ruby-identifier">image_path</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">captcha_challenge</span>)&#x000A;181:         &#x000A;182:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:alt</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'CAPTCHA'</span>&#x000A;183:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:id</span>] = <span class="ruby-node">&quot;#{sanitized_object_name}_captcha_image&quot;</span>&#x000A;184:         &#x000A;185:         <span class="ruby-identifier">image_tag</span> <span class="ruby-identifier">src</span>, <span class="ruby-identifier">options</span>&#x000A;186:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000048-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 175</span>&#x000A;175:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_challenge</span>(<span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span> = {})&#x000A;176:         <span class="ruby-identifier">src</span> = <span class="ruby-identifier">image_path</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">captcha_challenge</span>)&#x000A;177:         &#x000A;178:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:alt</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'CAPTCHA'</span>&#x000A;179:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:id</span>] = <span class="ruby-node">&quot;#{sanitized_object_name}_captcha_image&quot;</span>&#x000A;180:         &#x000A;181:         <span class="ruby-identifier">image_tag</span> <span class="ruby-identifier">src</span>, <span class="ruby-identifier">options</span>&#x000A;182:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000030'>
-                <a name='M000030'>      </a>
+              <div class='public-instance method' id='method-M000049'>
+                <a name='M000049'>      </a>
                 <div class='synopsis'>
                   <span class='name'>render_regenerate_challenge_link</span>
                   <span class='arguments'>(sanitized_object_name, object, options = {}, html_options = {})</span>
@@ -317,14 +305,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000030-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000049-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000030-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 197</span>&#x000A;197:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_regenerate_challenge_link</span>(<span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})&#x000A;198:         <span class="ruby-identifier">text</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:text</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">'Regenerate Captcha'</span>&#x000A;199:         <span class="ruby-identifier">success</span> = <span class="ruby-node">&quot;var result = request.responseJSON; $('#{sanitized_object_name}_captcha_image').src = result.captcha_image_path; $('#{sanitized_object_name}_captcha_challenge').value = result.captcha_challenge; $('#{sanitized_object_name}_captcha_solution').value = '';&quot;</span>&#x000A;200:         &#x000A;201:         <span class="ruby-identifier">link_to_remote</span> <span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge</span>(<span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">regenerate_path</span>, <span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:get</span>, <span class="ruby-identifier">:success</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">success</span>), <span class="ruby-identifier">html_options</span>&#x000A;202:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000049-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 193</span>&#x000A;193:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_regenerate_challenge_link</span>(<span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})&#x000A;194:         <span class="ruby-identifier">text</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:text</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">'Regenerate Captcha'</span>&#x000A;195:         <span class="ruby-identifier">success</span> = <span class="ruby-node">&quot;var result = request.responseJSON; $('#{sanitized_object_name}_captcha_image').src = result.captcha_image_path; $('#{sanitized_object_name}_captcha_challenge').value = result.captcha_challenge; $('#{sanitized_object_name}_captcha_solution').value = '';&quot;</span>&#x000A;196:         &#x000A;197:         <span class="ruby-identifier">link_to_remote</span> <span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge</span>(<span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">regenerate_path</span>, <span class="ruby-identifier">:method</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:get</span>, <span class="ruby-identifier">:success</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">success</span>), <span class="ruby-identifier">html_options</span>&#x000A;198:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000028'>
-                <a name='M000028'>      </a>
+              <div class='public-instance method' id='method-M000047'>
+                <a name='M000047'>      </a>
                 <div class='synopsis'>
                   <span class='name'>solved?</span>
                   <span class='arguments'>(challenge, solution)</span>
@@ -336,10 +324,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000028-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000047-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000028-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 172</span>&#x000A;172:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">solved?</span>(<span class="ruby-identifier">challenge</span>, <span class="ruby-identifier">solution</span>)&#x000A;173:         <span class="ruby-identifier">challenge</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">solution</span>)&#x000A;174:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000047-source'>     <span class="ruby-comment cmt"># File lib/validates_captcha/provider/image.rb, line 168</span>&#x000A;168:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">solved?</span>(<span class="ruby-identifier">challenge</span>, <span class="ruby-identifier">solution</span>)&#x000A;169:         <span class="ruby-identifier">challenge</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">solution</span>)&#x000A;170:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>

@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Wed Oct 07 09:20:22 +0200 2009</span>
+          <span class='datetime'>Wed Oct 07 13:58:41 +0200 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -51,7 +51,7 @@
             </p>
             <p>
             By default, question/answer captcha challenges are used, but you can also
-            switch to the built-in image captcha provider. If you stick to
+            switch to the built-in image captcha providers. If you stick to
             ValidatesCaptcha’s API, you can even implement your own captcha challenge
             provider.
             </p>
@@ -162,7 +162,7 @@
             Outside <tt>with_captcha_validation</tt>, no captcha validation is
             performed.
             </p>
-            <h2>Question/answer challange captchas (default provider)</h2>
+            <h2>Question/answer challenge captchas (default provider)</h2>
             <p>
             You can set the captcha provider to use question/answer challenges with the
             code below. It is best to put this in a Rails initializer.
@@ -173,10 +173,12 @@
             how to do it.
             </p>
             <pre>ValidatesCaptcha::Provider::Question.questions_and_answers = {&#x000A;  &quot;What's the opposite of bad?&quot; =&gt; &quot;good&quot;,&#x000A;  &quot;What are the initials of the creator of Rails?&quot; =&gt; &quot;DHH&quot;,&#x000A;  &quot;What's the sum of 3 and four?&quot; =&gt; [&quot;7&quot;, &quot;seven&quot;],&#x000A;  ... }</pre>
-            <h2>Image challenge captchas</h2>
+            <h2>Dynamic image challenge captchas</h2>
             <p>
-            You can set the captcha provider to use image challenges with the code
-            below. It is best to put this in a Rails initializer.
+            You can set the captcha provider to use dynamically created image
+            challenges with the code below. Dynamic means that the captcha image is
+            created on invocation. If you want to utilize this provider, it is best to
+            put this in a Rails initializer.
             </p>
             <pre>ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new</pre>
             <p>
@@ -191,6 +193,28 @@
             values to your needs.
             </p>
             <pre>ValidatesCaptcha::StringGenerator::Simple.alphabet = '01'&#x000A;ValidatesCaptcha::StringGenerator::Simple.length = 8</pre>
+            <h2>Static image challenge captchas</h2>
+            <p>
+            You can set the captcha provider to use static image challenges with the
+            code below. Static means that there exist some pre-created images in a
+            folder accessible by the web application. If you want to utilize this
+            provider, it is best to put this in a Rails initializer.
+            </p>
+            <pre>ValidatesCaptcha.provider = ValidatesCaptcha::Provider::StaticImage.new</pre>
+            <p>
+            There is a Rake tast for creating the static captcha images:
+            </p>
+            <pre>rake validates_captcha:create_static_images</pre>
+            <p>
+            This will create 3 images for you. To create a different number of images,
+            provide a COUNT argument:
+            </p>
+            <pre>rake validates_captcha:create_static_images COUNT=50</pre>
+            <p>
+            If you want to customize the path the images get saved to (or other stuff),
+            please see the documentation for <a
+            href="../classes/ValidatesCaptcha/Provider/StaticImage.html">ValidatesCaptcha::Provider::StaticImage</a>.
+            </p>
             <h2>Extensibility</h2>
             <p>
             Don&#8217;t like the built-in challenges? It&#8217;s easy to extend them or
