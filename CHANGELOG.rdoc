@@ -1,4 +1,4 @@
-== Edge
+== 0.9.4 (October 7, 2009)
 
 * Include new StaticImage provider
 
