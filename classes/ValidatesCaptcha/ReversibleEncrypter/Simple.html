@@ -50,14 +50,14 @@
             You can implement your own reversible encrypter by creating a class that
             conforms to the method definitions of the example below and assign an
             instance of it to <a
-            href="../Provider/Image.html#M000027">ValidatesCaptcha::Provider::Image#reversible_encrypter=</a>.
+            href="../Provider/Image.html#M000023">ValidatesCaptcha::Provider::Image#reversible_encrypter=</a>.
             </p>
             <p>
             Example for a custom encrypter/decrypter:
             </p>
             <pre>class ReverseString # very insecure and easily cracked&#x000A;  def encrypt(code)&#x000A;    code.reverse&#x000A;  end&#x000A;&#x000A;  def decrypt(encrypted_code)&#x000A;    encrypted_code.reverse&#x000A;  rescue SomeKindOfDecryptionError&#x000A;    nil&#x000A;  end&#x000A;end&#x000A;&#x000A;ValidatesCaptcha::Provider::Image.reversible_encrypter = ReverseString.new&#x000A;ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new</pre>
             <p>
-            Please note: The <a href="Simple.html#M000005">decrypt</a> method should
+            Please note: The <a href="Simple.html#M000008">decrypt</a> method should
             return <tt>nil</tt> if decryption fails.
             </p>
           </div>
@@ -65,8 +65,8 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000005">decrypt</a></li>
-              <li><a href="#M000004">encrypt</a></li>
+              <li><a href="#M000008">decrypt</a></li>
+              <li><a href="#M000007">encrypt</a></li>
             </ol>
           </div>
           <div id='section'>
@@ -84,8 +84,8 @@
             </div>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000005'>
-                <a name='M000005'>      </a>
+              <div class='public-instance method' id='method-M000008'>
+                <a name='M000008'>      </a>
                 <div class='synopsis'>
                   <span class='name'>decrypt</span>
                   <span class='arguments'>(encrypted_code)</span>
@@ -96,14 +96,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000005-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000008-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000005-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/reversible_encrypter/simple.rb, line 46</span>&#x000A;46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">encrypted_code</span>)&#x000A;47:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">decrypt</span>&#x000A;48:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">KEY</span>&#x000A;49:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">update</span>((<span class="ruby-identifier">encrypted_code</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'='</span> <span class="ruby-operator">*</span> (<span class="ruby-value">4</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">encrypted_code</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">%</span> <span class="ruby-value">4</span>)).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">'-_'</span>, <span class="ruby-value str">'+/'</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-value str">&quot;m&quot;</span>).<span class="ruby-identifier">first</span>) <span class="ruby-operator">+</span> <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">final</span>&#x000A;50:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-comment cmt"># OpenSSL::CipherError, OpenSSL::Cipher::CipherError</span>&#x000A;51:         <span class="ruby-keyword kw">nil</span>&#x000A;52:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000008-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/reversible_encrypter/simple.rb, line 46</span>&#x000A;46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">encrypted_code</span>)&#x000A;47:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">decrypt</span>&#x000A;48:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">KEY</span>&#x000A;49:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">update</span>((<span class="ruby-identifier">encrypted_code</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'='</span> <span class="ruby-operator">*</span> (<span class="ruby-value">4</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">encrypted_code</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">%</span> <span class="ruby-value">4</span>)).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">'-_'</span>, <span class="ruby-value str">'+/'</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-value str">&quot;m&quot;</span>).<span class="ruby-identifier">first</span>) <span class="ruby-operator">+</span> <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">final</span>&#x000A;50:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-comment cmt"># OpenSSL::CipherError, OpenSSL::Cipher::CipherError</span>&#x000A;51:         <span class="ruby-keyword kw">nil</span>&#x000A;52:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000004'>
-                <a name='M000004'>      </a>
+              <div class='public-instance method' id='method-M000007'>
+                <a name='M000007'>      </a>
                 <div class='synopsis'>
                   <span class='name'>encrypt</span>
                   <span class='arguments'>(code)</span>
@@ -114,10 +114,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000004-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000007-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000004-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/reversible_encrypter/simple.rb, line 39</span>&#x000A;39:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">code</span>)&#x000A;40:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">encrypt</span>&#x000A;41:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">KEY</span>&#x000A;42:         [<span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">code</span>) <span class="ruby-operator">+</span> <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">final</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">&quot;m&quot;</span>).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">'+/='</span>, <span class="ruby-value str">'-_ '</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;\n&quot;</span>, <span class="ruby-value str">''</span>)&#x000A;43:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000007-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/reversible_encrypter/simple.rb, line 39</span>&#x000A;39:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">code</span>)&#x000A;40:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">encrypt</span>&#x000A;41:         <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">KEY</span>&#x000A;42:         [<span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">code</span>) <span class="ruby-operator">+</span> <span class="ruby-ivar">@aes</span>.<span class="ruby-identifier">final</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">&quot;m&quot;</span>).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">'+/='</span>, <span class="ruby-value str">'-_ '</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;\n&quot;</span>, <span class="ruby-value str">''</span>)&#x000A;43:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
@@ -129,14 +129,6 @@
     <div id='footer'>
       <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
     </div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-10871272-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+    <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10871272-1"); pageTracker._trackPageview(); } catch(err) {}</script>
   </body>
 </html>

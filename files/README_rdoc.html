@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Tue Sep 29 09:11:55 +0200 2009</span>
+          <span class='datetime'>Wed Oct 07 09:20:22 +0200 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -45,11 +45,15 @@
             </p>
             <p>
             RDoc documentation (including this README as start page) can be found at <a
-            href="http://m4n.github.com/validates_captcha">m4n.github.com/validates_captcha</a>
+            href="http://m4n.github.com/validates_captcha.">m4n.github.com/validates_captcha.</a>
+            Validates Captcha was first announced <a
+            href="http://m4n.github.com/2009/09/28/introducing-validates-captcha.html">here</a>.
             </p>
             <p>
-            Validates Captcha uses question/answer captchas by default. But you can
-            also use the built-in image captcha provider &#8212; or implement your own.
+            By default, question/answer captcha challenges are used, but you can also
+            switch to the built-in image captcha provider. If you stick to
+            ValidatesCaptcha’s API, you can even implement your own captcha challenge
+            provider.
             </p>
             <h2>Basic Usage</h2>
             <p>
@@ -58,8 +62,8 @@
             in your Rails application.
             </p>
             <p>
-            <b>Step 1:</b> Extend the form of your view with the necessary captcha
-            display and input logic.
+            <b>Step 1:</b> Extend your view’s form with the necessary captcha display
+            and input logic.
             </p>
             <pre># app/views/comments/new.html.erb&#x000A;&lt;% form_for @comment do |f| %&gt;&#x000A;  &lt;%= f.error_messages %&gt;&#x000A;&#x000A;  &lt;!-- standard input fields: --&gt;&#x000A;  &lt;p&gt;&#x000A;    &lt;%= f.label :name %&gt;&lt;br /&gt;&#x000A;    &lt;%= f.text_field :name %&gt;&#x000A;  &lt;/p&gt;&#x000A;  &lt;!-- ... --&gt;&#x000A;&#x000A;  &lt;!-- now something new: --&gt;&#x000A;  &lt;p&gt;&#x000A;    &lt;%= f.label :captcha %&gt;&lt;br /&gt;&#x000A;    &lt;%= f.captcha_challenge  # displays the question or image %&gt;&#x000A;    &lt;%= f.captcha_field      # displays the input field %&gt;&#x000A;  &lt;/p&gt;&#x000A;&#x000A;  &lt;p&gt;&#x000A;    &lt;%= f.submit 'Create' %&gt;&#x000A;  &lt;/p&gt;&#x000A;&lt;% end %&gt;</pre>
             <p>
@@ -303,14 +307,6 @@
     <div id='footer'>
       <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
     </div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-10871272-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+    <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10871272-1"); pageTracker._trackPageview(); } catch(err) {}</script>
   </body>
 </html>

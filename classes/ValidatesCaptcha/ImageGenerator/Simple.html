@@ -68,7 +68,7 @@
             You can implement your own (better) image generator by creating a class
             that conforms to the method definitions of the example below and assign an
             instance of it to <a
-            href="../Provider/Image.html#M000029">ValidatesCaptcha::Provider::Image#image_generator=</a>.
+            href="../Provider/Image.html#M000025">ValidatesCaptcha::Provider::Image#image_generator=</a>.
             </p>
             <p>
             Example for a custom image generator:
@@ -79,9 +79,9 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000016">file_extension</a></li>
-              <li><a href="#M000014">generate</a></li>
-              <li><a href="#M000015">mime_type</a></li>
+              <li><a href="#M000014">file_extension</a></li>
+              <li><a href="#M000012">generate</a></li>
+              <li><a href="#M000013">mime_type</a></li>
             </ol>
           </div>
           <div id='section'>
@@ -104,8 +104,8 @@
             </div>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000016'>
-                <a name='M000016'>      </a>
+              <div class='public-instance method' id='method-M000014'>
+                <a name='M000014'>      </a>
                 <div class='synopsis'>
                   <span class='name'>file_extension</span>
                   <span class='arguments'>()</span>
@@ -116,14 +116,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000016-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000014-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000016-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 83</span>&#x000A;83:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file_extension</span>&#x000A;84:         <span class="ruby-constant">FILE_EXTENSION</span>&#x000A;85:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000014-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 83</span>&#x000A;83:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file_extension</span>&#x000A;84:         <span class="ruby-constant">FILE_EXTENSION</span>&#x000A;85:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000014'>
-                <a name='M000014'>      </a>
+              <div class='public-instance method' id='method-M000012'>
+                <a name='M000012'>      </a>
                 <div class='synopsis'>
                   <span class='name'>generate</span>
                   <span class='arguments'>(captcha_code)</span>
@@ -135,14 +135,14 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000014-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000012-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000014-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 52</span>&#x000A;52:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate</span>(<span class="ruby-identifier">captcha_code</span>)&#x000A;53:         <span class="ruby-identifier">image_width</span> = <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">*</span> <span class="ruby-value">20</span> <span class="ruby-operator">+</span> <span class="ruby-value">10</span>&#x000A;54:         &#x000A;55:         <span class="ruby-identifier">cmd</span> = []&#x000A;56:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;convert -size #{image_width}x40 xc:grey84 -background grey84 -fill black &quot;</span>&#x000A;57:         &#x000A;58:         <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">char</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>&#x000A;59:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -pointsize #{rand(8) + 15} &quot;</span>&#x000A;60:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -weight #{rand(2) == 0 ? '4' : '8'}00 &quot;</span>&#x000A;61:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -draw 'text #{5 + 20 * i},#{rand(10) + 20} \&quot;#{char}\&quot;' &quot;</span>&#x000A;62:         <span class="ruby-keyword kw">end</span>&#x000A;63:         &#x000A;64:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  -rotate #{rand(2) == 0 ? '-' : ''}5 -fill grey40 &quot;</span>&#x000A;65:         &#x000A;66:         <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>&#x000A;67:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  -draw 'line #{rand(image_width)},0 #{rand(image_width)},60' &quot;</span>&#x000A;68:         <span class="ruby-keyword kw">end</span>&#x000A;69:         &#x000A;70:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;  gif:-&quot;</span>&#x000A;71:         &#x000A;72:         <span class="ruby-identifier">image_magick_command</span> = <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>&#x000A;73:         &#x000A;74:         <span class="ruby-node">`#{image_magick_command}`</span>&#x000A;75:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000012-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 52</span>&#x000A;52:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate</span>(<span class="ruby-identifier">captcha_code</span>)&#x000A;53:         <span class="ruby-identifier">image_width</span> = <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">*</span> <span class="ruby-value">20</span> <span class="ruby-operator">+</span> <span class="ruby-value">10</span>&#x000A;54:         &#x000A;55:         <span class="ruby-identifier">cmd</span> = []&#x000A;56:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;convert -size #{image_width}x40 xc:grey84 -background grey84 -fill black &quot;</span>&#x000A;57:         &#x000A;58:         <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">char</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>&#x000A;59:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -pointsize #{rand(8) + 15} &quot;</span>&#x000A;60:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -weight #{rand(2) == 0 ? '4' : '8'}00 &quot;</span>&#x000A;61:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -draw 'text #{5 + 20 * i},#{rand(10) + 20} \&quot;#{char}\&quot;' &quot;</span>&#x000A;62:         <span class="ruby-keyword kw">end</span>&#x000A;63:         &#x000A;64:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  -rotate #{rand(2) == 0 ? '-' : ''}5 -fill grey40 &quot;</span>&#x000A;65:         &#x000A;66:         <span class="ruby-identifier">captcha_code</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>&#x000A;67:           <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  -draw 'line #{rand(image_width)},0 #{rand(image_width)},60' &quot;</span>&#x000A;68:         <span class="ruby-keyword kw">end</span>&#x000A;69:         &#x000A;70:         <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;  gif:-&quot;</span>&#x000A;71:         &#x000A;72:         <span class="ruby-identifier">image_magick_command</span> = <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>&#x000A;73:         &#x000A;74:         <span class="ruby-node">`#{image_magick_command}`</span>&#x000A;75:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000015'>
-                <a name='M000015'>      </a>
+              <div class='public-instance method' id='method-M000013'>
+                <a name='M000013'>      </a>
                 <div class='synopsis'>
                   <span class='name'>mime_type</span>
                   <span class='arguments'>()</span>
@@ -153,10 +153,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000015-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000013-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000015-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 78</span>&#x000A;78:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mime_type</span>&#x000A;79:         <span class="ruby-constant">MIME_TYPE</span>&#x000A;80:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000013-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/image_generator/simple.rb, line 78</span>&#x000A;78:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mime_type</span>&#x000A;79:         <span class="ruby-constant">MIME_TYPE</span>&#x000A;80:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
@@ -168,14 +168,6 @@
     <div id='footer'>
       <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
     </div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-10871272-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+    <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10871272-1"); pageTracker._trackPageview(); } catch(err) {}</script>
   </body>
 </html>

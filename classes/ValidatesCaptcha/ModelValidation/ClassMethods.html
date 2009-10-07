@@ -41,14 +41,14 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000008">with_captcha_validation</a></li>
+              <li><a href="#M000009">with_captcha_validation</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000008'>
-                <a name='M000008'>      </a>
+              <div class='public-instance method' id='method-M000009'>
+                <a name='M000009'>      </a>
                 <div class='synopsis'>
                   <span class='name'>with_captcha_validation</span>
                   <span class='arguments'>() {|| ...}</span>
@@ -64,10 +64,10 @@
                   <pre>User.with_captcha_validation do&#x000A;  @user = User.new(...)&#x000A;  @user.save&#x000A;end</pre>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000008-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000009-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000008-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/model_validation.rb, line 26</span>&#x000A;26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_captcha_validation</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;27:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">validate_captcha</span> = <span class="ruby-keyword kw">true</span>&#x000A;28:         <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">yield</span>&#x000A;29:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">validate_captcha</span> = <span class="ruby-keyword kw">false</span>&#x000A;30:         <span class="ruby-identifier">result</span>&#x000A;31:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000009-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/model_validation.rb, line 26</span>&#x000A;26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_captcha_validation</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)&#x000A;27:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">validate_captcha</span> = <span class="ruby-keyword kw">true</span>&#x000A;28:         <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">yield</span>&#x000A;29:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">validate_captcha</span> = <span class="ruby-keyword kw">false</span>&#x000A;30:         <span class="ruby-identifier">result</span>&#x000A;31:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
@@ -79,14 +79,6 @@
     <div id='footer'>
       <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
     </div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-10871272-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+    <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10871272-1"); pageTracker._trackPageview(); } catch(err) {}</script>
   </body>
 </html>
