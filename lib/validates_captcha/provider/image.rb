@@ -1,5 +1,3 @@
-require 'openssl'
-require 'active_support/secure_random'
 require 'action_view/helpers'
 
 module ValidatesCaptcha
@@ -79,8 +77,6 @@ module ValidatesCaptcha
     # ValidatesCaptcha::ImageGenerator::Simple on how to create your own.
     class Image
       include ActionView::Helpers
-      
-      KEY = ::ActiveSupport::SecureRandom.hex(32).freeze
       
       @@string_generator = nil
       @@reversible_encrypter = nil
