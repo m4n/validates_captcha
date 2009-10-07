@@ -5,10 +5,12 @@ ActiveRecord's validation mechanism and providing helpers for ActionController
 and ActionView.
 
 RDoc documentation (including this README as start page) can be found at 
-http://m4n.github.com/validates_captcha
+http://m4n.github.com/validates_captcha. Validates Captcha was first 
+announced {here}[http://m4n.github.com/2009/09/28/introducing-validates-captcha.html].
 
-Validates Captcha uses question/answer captchas by default. But you can 
-also use the built-in image captcha provider -- or implement your own.
+By default, question/answer captcha challenges are used, but you can also switch 
+to the built-in image captcha provider. If you stick to ValidatesCaptcha’s API, 
+you can even implement your own captcha challenge provider.
 
 
 
@@ -18,8 +20,8 @@ Validates Captcha extends ActiveRecord, ActionController and ActionView with
 helper methods that make it a snap to integrate captcha verification in your 
 Rails application.
 
-<b>Step #1:</b> Extend the form of your view with the necessary captcha display 
-and input logic.
+<b>Step #1:</b> Extend your view’s form with the necessary captcha display and 
+input logic.
 
   # app/views/comments/new.html.erb
   <% form_for @comment do |f| %>
