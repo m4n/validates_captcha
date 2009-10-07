@@ -76,9 +76,17 @@ end
 class ControllerValidationTest < ActionController::TestCase
   tests WidgetsController
   
-  def with_image_provider(&block)
+  def with_dynamic_image_provider(&block)
     old_provider = ValidatesCaptcha.provider
     provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
+    yield provider
+    ValidatesCaptcha.provider = old_provider
+  end
+  
+  def with_static_image_provider(&block)
+    old_provider = ValidatesCaptcha.provider
+    provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::StaticImage.new
+    provider.instance_variable_set "@images", ["/path/to/#{provider.send(:encrypt, 'hello')}#{provider.send(:image_file_extension)}"]
     yield provider
     ValidatesCaptcha.provider = old_provider
   end
@@ -109,9 +117,17 @@ class ControllerValidationTest < ActionController::TestCase
   end
   
   test "calling #save method of controller should not assign @invalid" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       challenge = provider.generate_challenge
       solution = provider.send(:decrypt, challenge)
+      
+      post :save, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_nil assigns(:invalid)
+    end
+    
+    with_static_image_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = 'hello'
       
       post :save, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
       assert_nil assigns(:invalid)
@@ -127,9 +143,17 @@ class ControllerValidationTest < ActionController::TestCase
   end
   
   test "calling #store method of controller should assign @invalid" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       challenge = provider.generate_challenge
       solution = provider.send(:decrypt, challenge).reverse
+      
+      post :store, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_not_nil assigns(:invalid)
+    end
+    
+    with_static_image_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = '---'
       
       post :store, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
       assert_not_nil assigns(:invalid)
@@ -145,9 +169,17 @@ class ControllerValidationTest < ActionController::TestCase
   end
   
   test "calling #persist method of controller should assign @invalid" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       challenge = provider.generate_challenge
       solution = provider.send(:decrypt, challenge).reverse
+      
+      post :persist, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_not_nil assigns(:invalid)
+    end
+    
+    with_static_image_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = '---'
       
       post :persist, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
       assert_not_nil assigns(:invalid)
@@ -163,9 +195,17 @@ class ControllerValidationTest < ActionController::TestCase
   end
   
   test "calling #bingo method of controller should not assign @invalid" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       challenge = provider.generate_challenge
       solution = provider.send(:decrypt, challenge).reverse
+      
+      post :bingo, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
+      assert_nil assigns(:invalid)
+    end
+    
+    with_static_image_provider do |provider|
+      challenge = provider.generate_challenge
+      solution = '---'
       
       post :bingo, { 'widget' => { 'captcha_challenge' => challenge, 'captcha_solution' => solution } }
       assert_nil assigns(:invalid)

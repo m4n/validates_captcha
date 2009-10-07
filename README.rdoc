@@ -9,7 +9,7 @@ http://m4n.github.com/validates_captcha. Validates Captcha was first
 announced {here}[http://m4n.github.com/2009/09/28/introducing-validates-captcha.html].
 
 By default, question/answer captcha challenges are used, but you can also switch 
-to the built-in image captcha provider. If you stick to ValidatesCaptcha’s API, 
+to the built-in image captcha providers. If you stick to ValidatesCaptcha’s API, 
 you can even implement your own captcha challenge provider.
 
 
@@ -154,7 +154,7 @@ Outside +with_captcha_validation+, no captcha validation is performed.
 
 
 
-== Question/answer challange captchas (default provider)
+== Question/answer challenge captchas (default provider)
 
 You can set the captcha provider to use question/answer challenges with 
 the code below. It is best to put this in a Rails initializer.
@@ -172,10 +172,11 @@ to do it.
 
 
 
-== Image challenge captchas
+== Dynamic image challenge captchas
 
-You can set the captcha provider to use image challenges with 
-the code below. It is best to put this in a Rails initializer.
+You can set the captcha provider to use dynamically created image challenges 
+with the code below.  Dynamic means that the captcha image is created on invocation.  
+If you want to utilize this provider, it is best to put this in a Rails initializer.
 
   ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
 
@@ -189,6 +190,29 @@ values to your needs.
 
   ValidatesCaptcha::StringGenerator::Simple.alphabet = '01'
   ValidatesCaptcha::StringGenerator::Simple.length = 8
+
+
+
+== Static image challenge captchas
+
+You can set the captcha provider to use static image challenges with 
+the code below.  Static means that there exist some pre-created images 
+in a folder accessible by the web application.  If you want to utilize 
+this provider, it is best to put this in a Rails initializer.
+
+  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::StaticImage.new
+
+There is a Rake tast for creating the static captcha images:
+
+  rake validates_captcha:create_static_images
+
+This will create 3 images for you. To create a different number of images, 
+provide a COUNT argument:
+
+  rake validates_captcha:create_static_images COUNT=50
+
+If you want to customize the path the images get saved to (or other stuff), 
+please see the documentation for ValidatesCaptcha::Provider::StaticImage.
 
 
 

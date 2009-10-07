@@ -1,9 +1,17 @@
 require 'test_helper'
 
 class ModelValidationTest < ValidatesCaptcha::TestCase
-  def with_image_provider(&block)
+  def with_dynamic_image_provider(&block)
     old_provider = ValidatesCaptcha.provider
     provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
+    yield provider
+    ValidatesCaptcha.provider = old_provider
+  end
+  
+  def with_static_image_provider(&block)
+    old_provider = ValidatesCaptcha.provider
+    provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::StaticImage.new
+    provider.instance_variable_set "@images", ["/path/to/#{provider.send(:encrypt, 'hello')}#{provider.send(:image_file_extension)}"]
     yield provider
     ValidatesCaptcha.provider = old_provider
   end
@@ -76,9 +84,16 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
   end
   
   test "not within a #with_captcha_validation block, calling valid? should return true if an invalid captcha_solution is set" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       widget = Widget.new
       widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge).reverse
+      
+      assert widget.valid?
+    end
+    
+    with_static_image_provider do |provider|
+      widget = Widget.new
+      widget.captcha_solution = '---'
       
       assert widget.valid?
     end
@@ -92,9 +107,16 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
   end
   
   test "not within a #with_captcha_validation block, calling valid? should return true if a valid captcha_solution is set" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       widget = Widget.new
       widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge)
+      
+      assert widget.valid?
+    end
+    
+    with_static_image_provider do |provider|
+      widget = Widget.new
+      widget.captcha_solution = 'hello'
       
       assert widget.valid?
     end
@@ -130,10 +152,21 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
   end
   
   test "within a #with_captcha_validation block, calling valid? should return false if an invalid captcha_solution is set" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       Widget.with_captcha_validation do
         widget = Widget.new
         widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge).reverse
+        
+        assert !widget.valid?
+        assert_equal 1, Array.wrap(widget.errors[:captcha_solution]).size
+        assert Array.wrap(widget.errors[:captcha_solution]).first.include?('invalid')
+      end
+    end
+    
+    with_static_image_provider do |provider|
+      Widget.with_captcha_validation do
+        widget = Widget.new
+        widget.captcha_solution = '---'
         
         assert !widget.valid?
         assert_equal 1, Array.wrap(widget.errors[:captcha_solution]).size
@@ -154,10 +187,19 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
   end
   
   test "within a #with_captcha_validation block, calling valid? should return true if a valid captcha_solution is set" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       Widget.with_captcha_validation do
         widget = Widget.new
         widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge)
+        
+        assert widget.valid?
+      end
+    end
+    
+    with_static_image_provider do |provider|
+      Widget.with_captcha_validation do
+        widget = Widget.new
+        widget.captcha_solution = 'hello'
         
         assert widget.valid?
       end
@@ -174,9 +216,22 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
   end
   
   test "with #with_captcha_validation block, calling valid? before and after the block should return true if valid? returned false within block" do
-    with_image_provider do |provider|
+    with_dynamic_image_provider do |provider|
       widget = Widget.new
       widget.captcha_solution = provider.send(:decrypt, widget.captcha_challenge).reverse
+      
+      assert widget.valid?
+      
+      Widget.with_captcha_validation do
+        assert !widget.valid?
+      end
+      
+      assert widget.valid?
+    end
+    
+    with_static_image_provider do |provider|
+      widget = Widget.new
+      widget.captcha_solution = '---'
       
       assert widget.valid?
       
