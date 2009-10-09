@@ -1,10 +1,10 @@
-require 'openssl'
-require 'active_support/secure_random'
+require 'active_support'
 
 module ValidatesCaptcha
   module ReversibleEncrypter
     # This class is responsible for encrypting and decrypting captcha codes. 
-    # It internally uses AES256 to do the string encryption/decryption.
+    # It internally uses ActiveSupport's MessageEncryptor to do the string 
+    # encryption/decryption.
     #
     # You can implement your own reversible encrypter by creating a class 
     # that conforms to the method definitions of the example below and 
@@ -29,25 +29,21 @@ module ValidatesCaptcha
     #
     # Please note: The #decrypt method should return +nil+ if decryption fails. 
     class Simple
-      KEY = ::ActiveSupport::SecureRandom.hex(32).freeze
+      KEY = ::ActiveSupport::SecureRandom.hex(64).freeze
       
       def initialize #:nodoc:
-        @aes = OpenSSL::Cipher::Cipher.new('AES-256-ECB')
+        @symmetric_encryptor = ::ActiveSupport::MessageEncryptor.new(KEY)
       end
     
-      # Encrypts a cleartext string using #key as encryption key. 
+      # Encrypts a cleartext string. 
       def encrypt(code)
-        @aes.encrypt
-        @aes.key = KEY
-        [@aes.update(code) + @aes.final].pack("m").tr('+/=', '-_ ').strip.gsub("\n", '')
+        @symmetric_encryptor.encrypt(code).gsub('+', '%2B').gsub('/', '%2F')
       end
     
-      # Decrypts an encrypted string using using #key as decryption key.
+      # Decrypts an encrypted string.
       def decrypt(encrypted_code)
-        @aes.decrypt
-        @aes.key = KEY
-        @aes.update((encrypted_code + '=' * (4 - encrypted_code.size % 4)).tr('-_', '+/').unpack("m").first) + @aes.final
-      rescue # OpenSSL::CipherError, OpenSSL::Cipher::CipherError
+        @symmetric_encryptor.decrypt encrypted_code.gsub('%2F', '/').gsub('%2B', '+')
+      rescue ::ActiveSupport::MessageEncryptor::InvalidMessage
         nil
       end
     end

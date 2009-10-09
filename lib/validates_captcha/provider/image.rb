@@ -166,7 +166,7 @@ module ValidatesCaptcha
       # Returns true if the captcha was solved using the given +challenge+ and +solution+, 
       # otherwise false.
       def solved?(challenge, solution)
-        challenge == encrypt(solution)
+        decrypt(challenge) == solution
       end
       
       # Returns an image tag with the source set to the url of the captcha image.

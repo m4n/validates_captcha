@@ -1,3 +1,8 @@
+== Edge
+
+* ReversibleEncrypter::Simple class now uses ActiveSupport's MessageEncryptor instead of custom implementation
+
+
 == 0.9.4 (October 7, 2009)
 
 * Include new StaticImage provider
