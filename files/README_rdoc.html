@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Wed Oct 07 13:58:41 +0200 2009</span>
+          <span class='datetime'>Fri Oct 09 12:23:53 +0200 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -180,7 +180,7 @@
             created on invocation. If you want to utilize this provider, it is best to
             put this in a Rails initializer.
             </p>
-            <pre>ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new</pre>
+            <pre>ValidatesCaptcha.provider = ValidatesCaptcha::Provider::DynamicImage.new</pre>
             <p>
             By default, image captchas have a length of 6 characters and the text
             displayed on the captcha image is created by randomly selecting characters
@@ -241,7 +241,7 @@
             
             </li>
             <li><a
-            href="../classes/ValidatesCaptcha/ReversibleEncrypter/Simple.html">ValidatesCaptcha::ReversibleEncrypter::Simple</a>
+            href="../classes/ValidatesCaptcha/SymmetricEncryptor/Simple.html">ValidatesCaptcha::SymmetricEncryptor::Simple</a>
             
             </li>
             <li><a

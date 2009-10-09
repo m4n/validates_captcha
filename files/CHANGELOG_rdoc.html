@@ -31,13 +31,27 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Wed Oct 07 13:39:58 +0200 2009</span>
+          <span class='datetime'>Fri Oct 09 13:07:07 +0200 2009</span>
         </div>
       </div>
       <div id='content'>
         <div id='text'>
           <div id='description'>
-            <h2>Edge</h2>
+            <h2>0.9.5 (October 9, 2009)</h2>
+            <ul>
+            <li>API change: renamed Provider::Image to Provider::DynamicImage in order to
+            guard against confusion
+            
+            </li>
+            <li>API change: renamed ReversibleEncrypter to SymmetricEncryptor
+            
+            </li>
+            <li>ReversibleEncrypter::Simple class now uses ActiveSupport&#8217;s
+            MessageEncryptor instead of custom implementation
+            
+            </li>
+            </ul>
+            <h2>0.9.4 (October 7, 2009)</h2>
             <ul>
             <li>Include new StaticImage provider
             

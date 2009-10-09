@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: ValidatesCaptcha::SymmetricEncryptor::Simple [Validates Captcha]</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          ValidatesCaptcha::SymmetricEncryptor::Simple
+        </h1>
+        <ol class='paths'>
+          <li>
+            <a href="../../../files/lib/validates_captcha/symmetric_encryptor/simple_rb.html">lib/validates_captcha/symmetric_encryptor/simple.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong>Object</strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            This class is responsible for encrypting and decrypting captcha codes. It
+            internally uses ActiveSupport&#8217;s MessageEncryptor to do the string
+            encryption/decryption.
+            </p>
+            <p>
+            You can implement your own symmetric encryptor by creating a class that
+            conforms to the method definitions of the example below and assign an
+            instance of it to <a
+            href="../Provider/DynamicImage.html#M000046">ValidatesCaptcha::Provider::DynamicImage#symmetric_encryptor=</a>.
+            </p>
+            <p>
+            Example for a custom symmetric encryptor:
+            </p>
+            <pre>class ReverseString # very insecure and easily cracked&#x000A;  def encrypt(code)&#x000A;    code.reverse&#x000A;  end&#x000A;&#x000A;  def decrypt(encrypted_code)&#x000A;    encrypted_code.reverse&#x000A;  rescue SomeKindOfDecryptionError&#x000A;    nil&#x000A;  end&#x000A;end&#x000A;&#x000A;ValidatesCaptcha::Provider::DynamicImage.symmetric_encryptor = ReverseString.new&#x000A;ValidatesCaptcha.provider = ValidatesCaptcha::Provider::DynamicImage.new</pre>
+            <p>
+            Please note: The <a href="Simple.html#M000016">decrypt</a> method should
+            return <tt>nil</tt> if decryption fails.
+            </p>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000016">decrypt</a></li>
+              <li><a href="#M000015">encrypt</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>KEY</td>
+                    <td>=</td>
+                    <td class='context-item-value'>::ActiveSupport::SecureRandom.hex(64).freeze</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public instance methods</h2>
+              <div class='public-instance method' id='method-M000016'>
+                <a name='M000016'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>decrypt</span>
+                  <span class='arguments'>(encrypted_code)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Decrypts an encrypted string.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000016-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000016-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/symmetric_encryptor/simple.rb, line 45</span>&#x000A;45:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">encrypted_code</span>)&#x000A;46:         <span class="ruby-ivar">@symmetric_encryptor</span>.<span class="ruby-identifier">decrypt</span> <span class="ruby-identifier">encrypted_code</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'%2F'</span>, <span class="ruby-value str">'/'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'%2B'</span>, <span class="ruby-value str">'+'</span>)&#x000A;47:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">MessageEncryptor</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidMessage</span>&#x000A;48:         <span class="ruby-keyword kw">nil</span>&#x000A;49:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000015'>
+                <a name='M000015'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>encrypt</span>
+                  <span class='arguments'>(code)</span>
+                </div>
+                <div class='description'>
+                  <p>
+                  Encrypts a cleartext string.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000015-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000015-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/symmetric_encryptor/simple.rb, line 40</span>&#x000A;40:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">code</span>)&#x000A;41:         <span class="ruby-ivar">@symmetric_encryptor</span>.<span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">code</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'+'</span>, <span class="ruby-value str">'%2B'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'/'</span>, <span class="ruby-value str">'%2F'</span>)&#x000A;42:       <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+    <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try { var pageTracker = _gat._getTracker("UA-10871272-1"); pageTracker._trackPageview(); } catch(err) {}</script>
+  </body>
+</html>

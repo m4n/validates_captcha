@@ -47,15 +47,15 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000010">validates_captcha</a></li>
-              <li><a href="#M000011">validates_captcha_of</a></li>
+              <li><a href="#M000004">validates_captcha</a></li>
+              <li><a href="#M000005">validates_captcha_of</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000010'>
-                <a name='M000010'>      </a>
+              <div class='public-instance method' id='method-M000004'>
+                <a name='M000004'>      </a>
                 <div class='synopsis'>
                   <span class='name'>validates_captcha</span>
                   <span class='arguments'>(conditions = {})</span>
@@ -63,7 +63,7 @@
                 <div class='description'>
                   <p>
                   This method is the one Validates Captcha got its name from. It internally
-                  calls <a href="ClassMethods.html#M000011">validates_captcha_of</a> with the
+                  calls <a href="ClassMethods.html#M000005">validates_captcha_of</a> with the
                   name of the controller as first argument and passing the conditions hash.
                   </p>
                   <p>
@@ -72,14 +72,14 @@
                   <pre>class UsersController &lt; ApplicationController&#x000A;  # Whenever a User gets saved, validate the captcha.&#x000A;  validates_captcha&#x000A;&#x000A;  def create&#x000A;    # ... user creation code ...&#x000A;  end&#x000A;&#x000A;  # ... more actions ...&#x000A;end</pre>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000010-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000004-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000010-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/controller_validation.rb, line 26</span>&#x000A;26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validates_captcha</span>(<span class="ruby-identifier">conditions</span> = {})&#x000A;27:         <span class="ruby-identifier">validates_captcha_of</span> <span class="ruby-identifier">controller_name</span>, <span class="ruby-identifier">conditions</span>&#x000A;28:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000004-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/controller_validation.rb, line 26</span>&#x000A;26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validates_captcha</span>(<span class="ruby-identifier">conditions</span> = {})&#x000A;27:         <span class="ruby-identifier">validates_captcha_of</span> <span class="ruby-identifier">controller_name</span>, <span class="ruby-identifier">conditions</span>&#x000A;28:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000011'>
-                <a name='M000011'>      </a>
+              <div class='public-instance method' id='method-M000005'>
+                <a name='M000005'>      </a>
                 <div class='synopsis'>
                   <span class='name'>validates_captcha_of</span>
                   <span class='arguments'>(model, conditions = {})</span>
@@ -102,10 +102,10 @@
                   <pre>class UsersController &lt; ApplicationController&#x000A;  validates_captcha_of User&#x000A;  validates_captcha_of :users, :only =&gt; [:create, :update]&#x000A;  validates_captcha_of 'user', :except =&gt; :persist&#x000A;&#x000A;  # ... actions go here ...&#x000A;end</pre>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000011-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000005-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000011-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/controller_validation.rb, line 47</span>&#x000A;47:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validates_captcha_of</span>(<span class="ruby-identifier">model</span>, <span class="ruby-identifier">conditions</span> = {})&#x000A;48:         <span class="ruby-identifier">model</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">model</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">classify</span>.<span class="ruby-identifier">constantize</span>&#x000A;49:         <span class="ruby-identifier">without_formats</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:without</span>)).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">:to_sym</span>)&#x000A;50:         &#x000A;51:         <span class="ruby-identifier">around_filter</span>(<span class="ruby-identifier">conditions</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">controller</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">|</span>&#x000A;52:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">without_formats</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">controller</span>.<span class="ruby-identifier">request</span>.<span class="ruby-identifier">format</span>.<span class="ruby-identifier">to_sym</span>)&#x000A;53:             <span class="ruby-identifier">action</span>.<span class="ruby-identifier">call</span>&#x000A;54:           <span class="ruby-keyword kw">else</span>&#x000A;55:             <span class="ruby-identifier">model</span>.<span class="ruby-identifier">with_captcha_validation</span> <span class="ruby-keyword kw">do</span>&#x000A;56:               <span class="ruby-identifier">action</span>.<span class="ruby-identifier">call</span>&#x000A;57:             <span class="ruby-keyword kw">end</span>&#x000A;58:           <span class="ruby-keyword kw">end</span>&#x000A;59:         <span class="ruby-keyword kw">end</span>&#x000A;60:       <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000005-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/controller_validation.rb, line 47</span>&#x000A;47:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validates_captcha_of</span>(<span class="ruby-identifier">model</span>, <span class="ruby-identifier">conditions</span> = {})&#x000A;48:         <span class="ruby-identifier">model</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">model</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">classify</span>.<span class="ruby-identifier">constantize</span>&#x000A;49:         <span class="ruby-identifier">without_formats</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:without</span>)).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">:to_sym</span>)&#x000A;50:         &#x000A;51:         <span class="ruby-identifier">around_filter</span>(<span class="ruby-identifier">conditions</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">controller</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">|</span>&#x000A;52:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">without_formats</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">controller</span>.<span class="ruby-identifier">request</span>.<span class="ruby-identifier">format</span>.<span class="ruby-identifier">to_sym</span>)&#x000A;53:             <span class="ruby-identifier">action</span>.<span class="ruby-identifier">call</span>&#x000A;54:           <span class="ruby-keyword kw">else</span>&#x000A;55:             <span class="ruby-identifier">model</span>.<span class="ruby-identifier">with_captcha_validation</span> <span class="ruby-keyword kw">do</span>&#x000A;56:               <span class="ruby-identifier">action</span>.<span class="ruby-identifier">call</span>&#x000A;57:             <span class="ruby-keyword kw">end</span>&#x000A;58:           <span class="ruby-keyword kw">end</span>&#x000A;59:         <span class="ruby-keyword kw">end</span>&#x000A;60:       <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
