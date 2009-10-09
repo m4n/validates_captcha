@@ -1,5 +1,6 @@
 == Edge
 
+* API change: renamed ReversibleEncrypter namespace to SymmetricEncryptor
 * ReversibleEncrypter::Simple class now uses ActiveSupport's MessageEncryptor instead of custom implementation
 
 

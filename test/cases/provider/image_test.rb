@@ -20,21 +20,21 @@ class ImageTest < ValidatesCaptcha::TestCase
     IMAGE.string_generator = old_string_generator
   end
   
-  test "defines a class level #reversible_encrypter method" do
-    assert_respond_to IMAGE, :reversible_encrypter
+  test "defines a class level #symmetric_encryptor method" do
+    assert_respond_to IMAGE, :symmetric_encryptor
   end
   
-  test "defines a class level #reversible_encrypter= method" do
-    assert_respond_to IMAGE, :reversible_encrypter=
+  test "defines a class level #symmetric_encryptor= method" do
+    assert_respond_to IMAGE, :symmetric_encryptor=
   end
   
-  test "#reversible_encrypter method's return value should equal the value set using the #reversible_encrypter= method" do
-    old_reversible_encrypter = IMAGE.reversible_encrypter
+  test "#symmetric_encryptor method's return value should equal the value set using the #symmetric_encryptor= method" do
+    old_symmetric_encryptor = IMAGE.symmetric_encryptor
     
-    IMAGE.reversible_encrypter = 'abc'
-    assert_equal 'abc', IMAGE.reversible_encrypter
+    IMAGE.symmetric_encryptor = 'abc'
+    assert_equal 'abc', IMAGE.symmetric_encryptor
     
-    IMAGE.reversible_encrypter = old_reversible_encrypter
+    IMAGE.symmetric_encryptor = old_symmetric_encryptor
   end
   
   test "defines a class level #image_generator method" do

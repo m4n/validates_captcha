@@ -45,8 +45,8 @@ module ValidatesCaptcha
     autoload :Simple, 'validates_captcha/string_generator/simple'
   end
   
-  module ReversibleEncrypter
-    autoload :Simple, 'validates_captcha/reversible_encrypter/simple'
+  module SymmetricEncryptor
+    autoload :Simple, 'validates_captcha/symmetric_encryptor/simple'
   end
   
   module ImageGenerator

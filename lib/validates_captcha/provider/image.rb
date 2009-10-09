@@ -63,7 +63,7 @@ module ValidatesCaptcha
     # An image captcha provider.
     #
     # This class contains the getters and setters for the backend classes:
-    # image generator, string generator, and reversible encrypter.  This
+    # image generator, string generator, and symmetric encryptor.  This
     # allows you to replace them with your custom implementations.  For more
     # information on how to bring the image provider to use your own
     # implementation instead of the default one, consult the documentation
@@ -79,7 +79,7 @@ module ValidatesCaptcha
       include ActionView::Helpers
       
       @@string_generator = nil
-      @@reversible_encrypter = nil
+      @@symmetric_encryptor = nil
       @@image_generator = nil
       
       class << self
@@ -95,16 +95,16 @@ module ValidatesCaptcha
           @@string_generator = generator
         end
         
-        # Returns the current captcha reversible encrypter. Defaults to an
-        # instance of the ValidatesCaptcha::ReversibleEncrypter::Simple class.
-        def reversible_encrypter
-          @@reversible_encrypter ||= ValidatesCaptcha::ReversibleEncrypter::Simple.new
+        # Returns the current captcha symmetric encryptor. Defaults to an
+        # instance of the ValidatesCaptcha::SymmetricEncryptor::Simple class.
+        def symmetric_encryptor
+          @@symmetric_encryptor ||= ValidatesCaptcha::SymmetricEncryptor::Simple.new
         end
         
-        # Sets the current captcha reversible encrypter. Used to set a
-        # custom reversible encrypter.
-        def reversible_encrypter=(encrypter)
-          @@reversible_encrypter = encrypter
+        # Sets the current captcha symmetric encryptor. Used to set a
+        # custom symmetric encryptor.
+        def symmetric_encryptor=(encryptor)
+          @@symmetric_encryptor = encryptor
         end
         
         # Returns the current captcha image generator. Defaults to an
@@ -211,11 +211,11 @@ module ValidatesCaptcha
         end
       
         def encrypt(code) #:nodoc:
-          self.class.reversible_encrypter.encrypt code
+          self.class.symmetric_encryptor.encrypt code
         end
       
         def decrypt(encrypted_code) #:nodoc:
-          self.class.reversible_encrypter.decrypt encrypted_code
+          self.class.symmetric_encryptor.decrypt encrypted_code
         end
         
         def generate_code #:nodoc:

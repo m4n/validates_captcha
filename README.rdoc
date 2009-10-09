@@ -233,7 +233,7 @@ that creates images that are harder to crack.
 Please see the documentation of the following classes for further information.
 
 * ValidatesCaptcha::StringGenerator::Simple
-* ValidatesCaptcha::ReversibleEncrypter::Simple
+* ValidatesCaptcha::SymmetricEncryptor::Simple
 * ValidatesCaptcha::ImageGenerator::Simple
 
 Or you can implement a custom captcha challenge provider and assign it to 

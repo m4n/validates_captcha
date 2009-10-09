@@ -1,14 +1,14 @@
 require 'active_support'
 
 module ValidatesCaptcha
-  module ReversibleEncrypter
+  module SymmetricEncryptor
     # This class is responsible for encrypting and decrypting captcha codes. 
     # It internally uses ActiveSupport's MessageEncryptor to do the string 
     # encryption/decryption.
     #
-    # You can implement your own reversible encrypter by creating a class 
+    # You can implement your own symmetric encryptor by creating a class 
     # that conforms to the method definitions of the example below and 
-    # assign an instance of it to ValidatesCaptcha::Provider::Image#reversible_encrypter=.
+    # assign an instance of it to ValidatesCaptcha::Provider::Image#symmetric_encryptor=.
     #
     # Example for a custom encrypter/decrypter:
     #
@@ -24,7 +24,7 @@ module ValidatesCaptcha
     #    end
     #  end
     #
-    #  ValidatesCaptcha::Provider::Image.reversible_encrypter = ReverseString.new
+    #  ValidatesCaptcha::Provider::Image.symmetric_encryptor = ReverseString.new
     #  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
     #
     # Please note: The #decrypt method should return +nil+ if decryption fails. 
