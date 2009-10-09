@@ -1,4 +1,4 @@
-== 0.9.5 (October 9, 2009)
+== Edge
 
 * API change: renamed Provider::Image to Provider::DynamicImage in order to guard against confusion
 
