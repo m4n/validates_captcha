@@ -37,7 +37,7 @@ module ValidatesCaptcha
   
   module Provider
     autoload :Question, 'validates_captcha/provider/question'
-    autoload :Image, 'validates_captcha/provider/image'
+    autoload :DynamicImage, 'validates_captcha/provider/dynamic_image'
     autoload :StaticImage, 'validates_captcha/provider/static_image'
   end
   

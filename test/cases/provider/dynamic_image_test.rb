@@ -2,7 +2,7 @@ require 'test_helper'
 
 IMAGE = ValidatesCaptcha::Provider::DynamicImage
 
-class ImageTest < ValidatesCaptcha::TestCase
+class DynamicImageTest < ValidatesCaptcha::TestCase
   test "defines a class level #string_generator method" do
     assert_respond_to IMAGE, :string_generator
   end
