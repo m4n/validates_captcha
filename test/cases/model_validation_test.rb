@@ -3,7 +3,7 @@ require 'test_helper'
 class ModelValidationTest < ValidatesCaptcha::TestCase
   def with_dynamic_image_provider(&block)
     old_provider = ValidatesCaptcha.provider
-    provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
+    provider = ValidatesCaptcha.provider = ValidatesCaptcha::Provider::DynamicImage.new
     yield provider
     ValidatesCaptcha.provider = old_provider
   end

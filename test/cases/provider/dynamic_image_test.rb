@@ -1,6 +1,6 @@
 require 'test_helper'
 
-IMAGE = ValidatesCaptcha::Provider::Image
+IMAGE = ValidatesCaptcha::Provider::DynamicImage
 
 class ImageTest < ValidatesCaptcha::TestCase
   test "defines a class level #string_generator method" do

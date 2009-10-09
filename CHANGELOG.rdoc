@@ -1,6 +1,9 @@
 == Edge
 
-* API change: renamed ReversibleEncrypter namespace to SymmetricEncryptor
+* API change: renamed Provider::Image to Provider::DynamicImage in order to guard against confusion
+
+* API change: renamed ReversibleEncrypter to SymmetricEncryptor
+
 * ReversibleEncrypter::Simple class now uses ActiveSupport's MessageEncryptor instead of custom implementation
 
 

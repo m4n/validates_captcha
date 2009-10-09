@@ -8,9 +8,10 @@ module ValidatesCaptcha
     #
     # You can implement your own symmetric encryptor by creating a class 
     # that conforms to the method definitions of the example below and 
-    # assign an instance of it to ValidatesCaptcha::Provider::Image#symmetric_encryptor=.
+    # assign an instance of it to 
+    # ValidatesCaptcha::Provider::DynamicImage#symmetric_encryptor=.
     #
-    # Example for a custom encrypter/decrypter:
+    # Example for a custom symmetric encryptor:
     #
     #  class ReverseString # very insecure and easily cracked
     #    def encrypt(code)
@@ -24,8 +25,8 @@ module ValidatesCaptcha
     #    end
     #  end
     #
-    #  ValidatesCaptcha::Provider::Image.symmetric_encryptor = ReverseString.new
-    #  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::Image.new
+    #  ValidatesCaptcha::Provider::DynamicImage.symmetric_encryptor = ReverseString.new
+    #  ValidatesCaptcha.provider = ValidatesCaptcha::Provider::DynamicImage.new
     #
     # Please note: The #decrypt method should return +nil+ if decryption fails. 
     class Simple

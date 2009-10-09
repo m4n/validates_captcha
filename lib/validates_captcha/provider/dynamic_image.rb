@@ -75,7 +75,7 @@ module ValidatesCaptcha
     # But you are not bound to ImageMagick.  If you want to provide a custom image 
     # generator, take a look at the documentation for 
     # ValidatesCaptcha::ImageGenerator::Simple on how to create your own.
-    class Image
+    class DynamicImage
       include ActionView::Helpers
       
       @@string_generator = nil
