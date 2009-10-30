@@ -5,9 +5,10 @@ module ValidatesCaptcha
       base.send :include, InstanceMethods
       
       base.class_eval do
-        attr_accessible :captcha_challenge, :captcha_solution
         attr_accessor :captcha_solution
         attr_writer :captcha_challenge
+        
+        alias_method_chain :attributes=, :captcha_fields
         
         validate :validate_captcha, :if => :validate_captcha?
       end
@@ -45,6 +46,21 @@ module ValidatesCaptcha
       def captcha_challenge #:nodoc:
         return @captcha_challenge unless @captcha_challenge.blank?
         @captcha_challenge = ValidatesCaptcha.provider.generate_challenge
+      end
+      
+      def attributes_with_captcha_fields=(new_attributes, guard_protected_attributes = true)
+        if new_attributes && guard_protected_attributes &&
+            (new_attributes.key?('captcha_challenge') || new_attributes.key?(:captcha_challenge))
+          attributes = new_attributes.dup
+          attributes.stringify_keys!
+          
+          self.captcha_challenge = attributes.delete('captcha_challenge')
+          self.captcha_solution = attributes.delete('captcha_solution')
+          
+          new_attributes = attributes
+        end
+        
+        send :attributes_without_captcha_fields=, new_attributes, guard_protected_attributes
       end
       
       private      

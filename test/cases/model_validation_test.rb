@@ -23,10 +23,6 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
     ValidatesCaptcha.provider = old_provider
   end
   
-  test "defines an accessible attribute named +captcha_solution+" do
-    assert Widget.accessible_attributes.include?('captcha_solution')
-  end
-  
   test "defines an instance level #captcha_solution method" do
     assert_respond_to Widget.new, :captcha_solution
   end
@@ -42,10 +38,6 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
     assert_equal 'abc123', widget.captcha_solution
   end
   
-  test "defines an accessible attribute named +captcha_challenge+" do
-    assert Widget.accessible_attributes.include?('captcha_challenge')
-  end
-  
   test "defines an instance level #captcha_challenge method" do
     assert_respond_to Widget.new, :captcha_challenge
   end
@@ -59,6 +51,28 @@ class ModelValidationTest < ValidatesCaptcha::TestCase
     widget.captcha_challenge = 'asdfghjk3456789'
     
     assert_equal 'asdfghjk3456789', widget.captcha_challenge
+  end
+  
+  test "should not add captcha_challenge as attr_accessible" do
+    assert !(Widget.accessible_attributes || []).include?('captcha_challenge')
+  end
+  
+  test "should not add captcha_solution as attr_accessible" do
+    assert !(Widget.accessible_attributes || []).include?('captcha_solution')
+  end
+  
+  test "should also assign non-attr_accessible captcha fields when mass assigning attributes" do
+    widget = Widget.new
+    
+    widget.attributes = { :name => 'foo', :captcha_challenge => 'bar', :captcha_solution => 'baz' }
+    assert_equal 'foo', widget.name
+    assert_equal 'bar', widget.captcha_challenge
+    assert_equal 'baz', widget.captcha_solution
+    
+    widget.attributes = { 'name' => 'bar', 'captcha_challenge' => 'baz', 'captcha_solution' => 'foo' }
+    assert_equal 'bar', widget.name
+    assert_equal 'baz', widget.captcha_challenge
+    assert_equal 'foo', widget.captcha_solution
   end
   
   test "defines #validate_captcha method callback of kind +validate+" do
