@@ -29,10 +29,10 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'doc'
   rdoc.title = "Validates Captcha"
   rdoc.main = "README.rdoc"
- 
+
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.options << '--charset' << 'utf-8'
-  
+
   rdoc.rdoc_files.include 'README.rdoc'
   rdoc.rdoc_files.include 'MIT-LICENSE'
   rdoc.rdoc_files.include 'CHANGELOG.rdoc'
@@ -52,18 +52,18 @@ end
 
 desc 'Run tests by default'
 task :default => :test
- 
+
 Rake::TestTask.new do |t|
   t.libs << 'test'
   t.test_files = FileList['test/**/*_test.rb']
   #t.verbose = true
   #t.warning = true
 end
- 
- 
- 
+
+
+
 spec = eval(File.read('validates_captcha.gemspec'))
- 
+
 Rake::GemPackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
   pkg.need_tar = true
@@ -76,9 +76,9 @@ desc 'Publish the release files to RubyForge'
 task :release => [:package] do
   require 'rubyforge'
   require 'rake/contrib/rubyforgepublisher'
- 
+
   packages = %w(gem tgz zip).collect { |ext| "pkg/#{PKG_NAME}-#{PKG_VERSION}.#{ext}" }
- 
+
   rubyforge = RubyForge.new
   rubyforge.configure
   rubyforge.add_release RUBY_FORGE_PROJECT, RUBY_FORGE_PROJECT, RELEASE_NAME, *packages

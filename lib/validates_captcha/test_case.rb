@@ -10,3 +10,4 @@ module ValidatesCaptcha #:nodoc:
     end
   end
 end
+

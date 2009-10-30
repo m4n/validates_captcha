@@ -22,10 +22,10 @@
 #++
 
 
-# This module contains the getter and setter for the captcha provider. 
-# This allows you to replace it with your custom implementation. For more 
-# information on how to bring Validates Captcha to use your own 
-# implementation instead of the default one, consult the documentation 
+# This module contains the getter and setter for the captcha provider.
+# This allows you to replace it with your custom implementation. For more
+# information on how to bring Validates Captcha to use your own
+# implementation instead of the default one, consult the documentation
 # for the default provider.
 module ValidatesCaptcha
   autoload :ModelValidation, 'validates_captcha/model_validation'
@@ -34,34 +34,34 @@ module ValidatesCaptcha
   autoload :FormBuilder, 'validates_captcha/form_builder'
   autoload :TestCase, 'validates_captcha/test_case'
   autoload :VERSION, 'validates_captcha/version'
-  
+
   module Provider
     autoload :Question, 'validates_captcha/provider/question'
     autoload :DynamicImage, 'validates_captcha/provider/dynamic_image'
     autoload :StaticImage, 'validates_captcha/provider/static_image'
   end
-  
+
   module StringGenerator
     autoload :Simple, 'validates_captcha/string_generator/simple'
   end
-  
+
   module SymmetricEncryptor
     autoload :Simple, 'validates_captcha/symmetric_encryptor/simple'
   end
-  
+
   module ImageGenerator
     autoload :Simple, 'validates_captcha/image_generator/simple'
   end
-  
+
   @@provider = nil
-  
+
   class << self
     # Returns Validates Captcha's current version number.
     def version
       ValidatesCaptcha::VERSION::STRING
     end
-    
-    # Returns the current captcha challenge provider. Defaults to an instance of 
+
+    # Returns the current captcha challenge provider. Defaults to an instance of
     # the ValidatesCaptcha::Provider::Question class.
     def provider
       @@provider ||= Provider::Question.new
