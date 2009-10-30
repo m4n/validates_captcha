@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.name = 'validates_captcha'
   s.version = '0.9.6'
-  s.date = '2009-10-09'
+  s.date = '2009-10-30'
   s.summary = "Captcha verification for Rails using ActiveRecord's validation mechanism"
   s.description = "A captcha verification approach for Rails apps, directly integrated into ActiveRecord’s validation mechanism and providing helpers for ActionController and ActionView."
 
