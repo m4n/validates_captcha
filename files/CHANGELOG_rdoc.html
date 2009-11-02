@@ -31,12 +31,19 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Fri Oct 09 13:07:07 +0200 2009</span>
+          <span class='datetime'>Fri Oct 30 11:06:41 +0100 2009</span>
         </div>
       </div>
       <div id='content'>
         <div id='text'>
           <div id='description'>
+            <h2>0.9.6 (October 30, 2009)</h2>
+            <ul>
+            <li>Do not make captcha_challenge and captcha_solution attr_accessible. Instead
+            overwrite AR#attributes= so they can be mass assigned.
+            
+            </li>
+            </ul>
             <h2>0.9.5 (October 9, 2009)</h2>
             <ul>
             <li>API change: renamed Provider::Image to Provider::DynamicImage in order to
