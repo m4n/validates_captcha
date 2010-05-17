@@ -1,3 +1,8 @@
+== Edge
+
+* Allow an individual secret to be set for SymmetricEncryptor::Simple.
+
+
 == 0.9.6 (October 30, 2009)
 
 * Do not make captcha_challenge and captcha_solution attr_accessible. Instead overwrite AR#attributes= so they can be mass assigned.

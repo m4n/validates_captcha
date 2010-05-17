@@ -3,6 +3,27 @@ require 'test_helper'
 SE = ValidatesCaptcha::SymmetricEncryptor::Simple
 
 class SymmetricEncryptorTest < ValidatesCaptcha::TestCase
+  test "defines a class level #secret method" do
+    assert_respond_to SE, :secret
+  end
+
+  test "defines an instance level #secret method" do
+    assert_respond_to SE.new, :secret
+  end
+
+  test "defines a class level #secret= method" do
+    assert_respond_to SE, :secret=
+  end
+
+  test "#secret method's return value should equal the value set using the #secret= method" do
+    old_secret = SE.secret
+
+    SE.secret = 'abc'
+    assert_equal 'abc', SE.secret
+
+    SE.secret = old_secret
+  end
+
   test "defines an instance level #encrypt method" do
     assert_respond_to SE.new, :encrypt
   end

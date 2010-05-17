@@ -6,6 +6,11 @@ module ValidatesCaptcha
     # It internally uses ActiveSupport's MessageEncryptor to do the string
     # encryption/decryption.
     #
+    # To give each Rails instance the same secret key, put the following in an 
+    # initializer:
+    #
+    #  ValidatesCaptcha::SymmetricEncryptor::Simple.secret = 'bd66e2479b5...'
+    #
     # You can implement your own symmetric encryptor by creating a class
     # that conforms to the method definitions of the example below and
     # assign an instance of it to
@@ -30,10 +35,22 @@ module ValidatesCaptcha
     #
     # Please note: The #decrypt method should return +nil+ if decryption fails.
     class Simple
-      KEY = ::ActiveSupport::SecureRandom.hex(64).freeze
+      @@secret = ::ActiveSupport::SecureRandom.hex(64)
+
+      def self.secret #:nodoc:
+        @@secret
+      end
+
+      def self.secret=(secret) #:nodoc:
+        @@secret = secret
+      end
+
+      def secret #:nodoc:
+        @@secret
+      end
 
       def initialize #:nodoc:
-        @symmetric_encryptor = ::ActiveSupport::MessageEncryptor.new(KEY)
+        @symmetric_encryptor = ::ActiveSupport::MessageEncryptor.new(secret)
       end
 
       # Encrypts a cleartext string.
