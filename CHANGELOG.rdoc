@@ -1,4 +1,4 @@
-== Edge
+== 0.9.7 (June 1, 2010)
 
 * Allow an individual secret to be set for SymmetricEncryptor::Simple.
 
