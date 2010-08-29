@@ -17,7 +17,7 @@ module ValidatesCaptcha
         "Bread, ham or milk: which is something to drink?" => "milk",
         "What day is today, if yesterday was Friday?" => "Saturday",
         "What day is today, if tomorrow is Tuesday?" => "Monday",
-        "What is the 2nd letter of the the third word in this question?" => "h",
+        "What is the 2nd letter of the third word in this question?" => "h",
         "What color is the sky on a sunny day?" => "blue" }.freeze
 
       @@questions_and_answers = DEFAULT_QUESTIONS_AND_ANSWERS
