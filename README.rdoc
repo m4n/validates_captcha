@@ -1,6 +1,6 @@
 = Validates Captcha
 
-A captcha verification approach for Rails apps, directly integrated into 
+A captcha verification approach for Rails 2.3 apps, directly integrated into 
 ActiveRecord's validation mechanism and providing helpers for ActionController 
 and ActionView.
 
