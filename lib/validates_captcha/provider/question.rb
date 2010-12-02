@@ -87,9 +87,13 @@ module ValidatesCaptcha
       # providing a +:text+ key in the +options+ hash.
       def render_regenerate_challenge_link(sanitized_object_name, object, options = {}, html_options = {})
         text = options.delete(:text) || 'New question'
-        success = "var result = request.responseJSON; $('#{sanitized_object_name}_captcha_question').update(result.captcha_challenge); $('#{sanitized_object_name}_captcha_challenge').value = result.captcha_challenge; $('#{sanitized_object_name}_captcha_solution').value = '';"
-
-        link_to_remote text, options.reverse_merge(:url => regenerate_path, :method => :get, :success => success), html_options
+        if options.delete(:jquery)
+          onclick = "jQuery.getJSON('#{regenerate_path}', function(result){jQuery('##{sanitized_object_name}_captcha_question').text(result.captcha_challenge); jQuery('##{sanitized_object_name}_captcha_challenge').val(result.captcha_challenge); jQuery('##{sanitized_object_name}_captcha_solution').val('');});return false;"
+          link_to text, "#", options.reverse_merge(:onclick => onclick), html_options
+        else
+          success = "var result = request.responseJSON; $('#{sanitized_object_name}_captcha_question').update = result.captcha_challenge; $('#{sanitized_object_name}_captcha_challenge').value = result.captcha_challenge; $('#{sanitized_object_name}_captcha_solution').value = '';"
+          link_to_remote text, options.reverse_merge(:url => regenerate_path, :method => :get, :success => success), html_options
+        end
       end
 
       private
