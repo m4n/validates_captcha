@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.name = 'validates_captcha'
-  s.version = '0.9.7'
-  s.date = '2010-06-01'
+  s.version = '0.9.8'
+  s.date = '2010-12-03'
   s.summary = "Captcha verification for Rails using ActiveRecord's validation mechanism"
   s.description = "A captcha verification approach for Rails apps, directly integrated into ActiveRecord’s validation mechanism and providing helpers for ActionController and ActionView."
 
@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   #s.test_files = Dir['test/**/*'].sort # insecure
   s.test_files = ["test/cases", "test/cases/controller_validation_test.rb", "test/cases/image_generator", "test/cases/image_generator/simple_test.rb", "test/cases/model_validation_test.rb", "test/cases/provider", "test/cases/provider/dynamic_image_test.rb", "test/cases/provider/question_test.rb", "test/cases/provider/static_image_test.rb", "test/cases/string_generator", "test/cases/string_generator/simple_test.rb", "test/cases/symmetric_encryptor", "test/cases/symmetric_encryptor/simple_test.rb", "test/cases/validates_captcha_test.rb", "test/test_helper.rb"]
 
-  s.add_dependency 'actionpack', '>= 2.3.2'
-  s.add_dependency 'activerecord', '>= 2.3.2'
+  s.add_dependency 'actionpack', '~> 2.3.2'
+  s.add_dependency 'activerecord', '~> 2.3.2'
 
   s.require_path = 'lib'
 
