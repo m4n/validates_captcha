@@ -122,7 +122,7 @@ new challenge and updates the question/image after the request is complete.
 
 +regenerate_captcha_challenge_link+ internally calls Rails' +link_to_remote+
 helper method. So it relies on the Prototype javascript framework to be 
-available on the page. As of version 0.9.8 you can pass +:jquery => true+
+available on the page. As of version 0.9.8 you can pass <tt>:jquery => true</tt>
 as an option to render Javascript that's based on jQuery.
 
 The anchor's text defaults to 'New question' (question challenge) and 
