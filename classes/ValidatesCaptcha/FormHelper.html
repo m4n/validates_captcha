@@ -49,8 +49,8 @@
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000054'>
-                <a name='M000054'>      </a>
+              <div class='method public-instance' id='method-M000054'>
+                <a name='M000054'></a>
                 <div class='synopsis'>
                   <span class='name'>captcha_challenge</span>
                   <span class='arguments'>(object_name, options = {})</span>
@@ -71,8 +71,8 @@
                   <pre id='M000054-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 6</span>&#x000A; 6:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_challenge</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A; 7:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys!</span>&#x000A; 8: &#x000A; 9:       <span class="ruby-identifier">object</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:object</span>)&#x000A;10:       <span class="ruby-identifier">sanitized_object_name</span> = <span class="ruby-identifier">object_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\]\[|[^-a-zA-Z0-9:.]/</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/_$/</span>, <span class="ruby-value str">&quot;&quot;</span>)&#x000A;11: &#x000A;12:       <span class="ruby-constant">ValidatesCaptcha</span>.<span class="ruby-identifier">provider</span>.<span class="ruby-identifier">render_challenge</span> <span class="ruby-identifier">sanitized_object_name</span>, <span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>&#x000A;13:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000055'>
-                <a name='M000055'>      </a>
+              <div class='method public-instance' id='method-M000055'>
+                <a name='M000055'></a>
                 <div class='synopsis'>
                   <span class='name'>captcha_field</span>
                   <span class='arguments'>(object_name, options = {})</span>
@@ -94,8 +94,8 @@
                   <pre id='M000055-source'>    <span class="ruby-comment cmt"># File lib/validates_captcha/form_helper.rb, line 19</span>&#x000A;19:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">captcha_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">options</span> = {})&#x000A;20:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:id</span>)&#x000A;21: &#x000A;22:       <span class="ruby-identifier">hidden_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha_challenge</span>, <span class="ruby-identifier">options</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">text_field</span>(<span class="ruby-identifier">object_name</span>, <span class="ruby-identifier">:captcha_solution</span>, <span class="ruby-identifier">options</span>)&#x000A;23:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000056'>
-                <a name='M000056'>      </a>
+              <div class='method public-instance' id='method-M000056'>
+                <a name='M000056'></a>
                 <div class='synopsis'>
                   <span class='name'>regenerate_captcha_challenge_link</span>
                   <span class='arguments'>(object_name, options = {}, html_options = {})</span>

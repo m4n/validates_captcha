@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Wed Jun 02 03:22:00 +0200 2010</span>
+          <span class='datetime'>Fri Dec 03 11:25:07 +0100 2010</span>
         </div>
       </div>
       <div id='content'>
@@ -39,8 +39,8 @@
           <div id='description'>
             <h1>Validates Captcha</h1>
             <p>
-            A captcha verification approach for Rails apps, directly integrated into
-            ActiveRecord&#8217;s validation mechanism and providing helpers for
+            A captcha verification approach for Rails 2.3 apps, directly integrated
+            into ActiveRecord&#8217;s validation mechanism and providing helpers for
             ActionController and ActionView.
             </p>
             <p>
@@ -128,7 +128,9 @@
             <p>
             <tt>regenerate_captcha_challenge_link</tt> internally calls Rails&#8217;
             <tt>link_to_remote</tt> helper method. So it relies on the Prototype
-            javascript framework to be available on the page.
+            javascript framework to be available on the page. As of version 0.9.8 you
+            can pass <tt>:jquery =&gt; true</tt> as an option to render Javascript
+            that&#8217;s based on jQuery.
             </p>
             <p>
             The anchor&#8217;s text defaults to &#8216;New question&#8217; (question
