@@ -178,7 +178,8 @@ module ValidatesCaptcha
       #
       # Internally calls Rails' +link_to_remote+ helper method, passing the +options+ and
       # +html_options+ arguments. So it relies on the Prototype javascript framework
-      # to be available on the web page.
+      # to be available on the web page. As of version 0.9.8 you can pass +:jquery => true+
+      # as an option to render Javascript that's based on jQuery.
       #
       # The anchor text defaults to 'Regenerate Captcha'. You can set this to a custom value
       # providing a +:text+ key in the +options+ hash.

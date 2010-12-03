@@ -1,3 +1,8 @@
+== 0.9.8 (December 3, 2010)
+
+* "reload captcha" works with jquery too. In the render_regenerate_challenge_link you should pass parameter :jquery => true
+
+
 == 0.9.7 (June 1, 2010)
 
 * Allow an individual secret to be set for SymmetricEncryptor::Simple.
